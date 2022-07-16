@@ -1,0 +1,16 @@
+view {
+  color: white;
+  position: fixed;
+  font-size: 90rpx;
+  width: 1em;
+  font-family: '方正舒体';
+}
+#chapterNum {
+  left: 240rpx;
+  top: 150rpx;
+}
+#chapterName {
+  font-size: 110rpx;
+  left: 360rpx;
+  top: 240rpx;
+}
