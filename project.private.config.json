@@ -58,6 +58,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "invitation",
+          "pathName": "pages/invitation/invitation",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

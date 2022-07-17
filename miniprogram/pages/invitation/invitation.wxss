@@ -1,1 +1,37 @@
-/* pages/invitation/invitation.wxss */
+#background {
+  position: fixed;
+  z-index: -1;
+}
+
+#paper {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 660rpx;
+  top: 20%;
+}
+
+#buttonBox {
+  position: absolute;
+  z-index: 1;
+  bottom: 10rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+#start {
+  transform: translateY(-115rpx);
+  font-size: 80rpx;
+  font-family: '方正舒体';
+}
+#content {
+  width: 600rpx;
+  text-indent: 2em;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 350rpx;
+}
+p {
+  display: block;
+}
