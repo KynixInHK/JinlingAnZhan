@@ -1,0 +1,19 @@
+#background {
+  position: fixed;
+  z-index: -1;
+}
+.content {
+  width: 500rpx;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 250rpx;
+  text-indent: 2em;
+  line-height: 2em;
+  font-size: 36rpx;
+  /* color: white; */
+  font-weight: bold;
+}
+p {
+  display: block;
+}

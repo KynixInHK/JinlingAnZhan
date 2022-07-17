@@ -93,6 +93,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "thanks",
+          "pathName": "pages/thanks/thanks",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
