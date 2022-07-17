@@ -79,6 +79,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "science",
+          "pathName": "pages/science/science",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
