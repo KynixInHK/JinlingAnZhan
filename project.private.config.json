@@ -65,6 +65,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "words",
+          "pathName": "pages/wordss/wordss",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

@@ -1,0 +1,56 @@
+#title {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 50rpx;
+  top: 185rpx;
+}
+.box {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  top: 130rpx;
+}
+.box view {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 48rpx;
+  top: 25rpx;
+}
+.tool {
+  width: 100rpx;
+}
+#bao {
+  position: fixed;
+  left: 20rpx;
+  top: 130rpx;
+}
+#juan {
+  position: fixed;
+  right: 20rpx;
+  top: 130rpx;
+}
+.content {
+  width: 500rpx;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 300rpx;
+  text-indent: 2em;
+  font-size: 36rpx;
+}
+.inputBox {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  bottom: 130rpx;
+}
+input {
+  position: absolute;
+  top: 30rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
