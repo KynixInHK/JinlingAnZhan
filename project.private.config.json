@@ -72,6 +72,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "master",
+          "pathName": "pages/master/master",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

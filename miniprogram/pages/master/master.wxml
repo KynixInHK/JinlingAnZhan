@@ -1,0 +1,12 @@
+<image id="background" src="https://pic.imgdb.cn/item/62d3d3a8f54cd3f9376f71bb.png" style="width: {{WindowWidth}}px; height: {{WindowHeight}}px; z-index: -1; position: fixed;"></image>
+<view class="box">
+  <image src="https://s3.bmp.ovh/imgs/2022/07/17/80aead74f3456396.png" mode="widthFix" style="width: 450rpx;"></image>
+  <view>风云骤起</view>
+</view>
+<image class="tool" id="bao" mode="widthFix" src="https://s3.bmp.ovh/imgs/2022/07/17/660754f9d92855a7.png"></image>
+<image class="tool" id="juan" mode="widthFix" src="https://pic.imgdb.cn/item/62d3cd4af54cd3f9376487b8.png"></image>
+<image class="human" src="https://pic.imgdb.cn/item/62d3da77f54cd3f9377c317b.png" mode="widthFix" style="width: 400rpx;"></image>
+<view class="boxs">
+  <image class="wenzikuang" src="https://pic.imgdb.cn/item/62d3db36f54cd3f9377d3f1d.png" mode="widthFix"></image>
+  <view class="content">戴笠日记的馆藏量太大了，从头到尾全部读完费时又费力，其实我只需要找出该时间段内的日记阅读即可。可如何快速找出戴笠1937年8月的日记呢?</view>
+</view>
