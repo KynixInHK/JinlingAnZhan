@@ -5,9 +5,16 @@
     "pages/menu/menu",
     "pages/main/main",
     "pages/wordss/wordss",
+<<<<<<< HEAD
     "pages/invitation/invitation",
     
     "pages/master/master"
+=======
+    "pages/master/master",
+    "pages/science/science",
+    "pages/files/files",
+    "pages/thanks/thanks"
+>>>>>>> 50d6615885bc29b130bf551e2ce8ffa53af5a720
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -79,6 +79,27 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "science",
+          "pathName": "pages/science/science",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "files",
+          "pathName": "pages/files/files",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "thanks",
+          "pathName": "pages/thanks/thanks",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
