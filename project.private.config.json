@@ -86,6 +86,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "files",
+          "pathName": "pages/files/files",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

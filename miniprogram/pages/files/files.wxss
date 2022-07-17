@@ -1,0 +1,41 @@
+#background {
+  position: fixed;
+  z-index: -1;
+}
+
+#paper {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 660rpx;
+  top: 20%;
+}
+
+.box {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  top: 120rpx;
+}
+.box view {
+  font-size: 60rpx;
+  font-family: '方正舒体';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40rpx;
+}
+.content {
+  width: 600rpx;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 450rpx;
+  text-indent: 2em;
+}
+#back {
+  position: fixed;
+  top: 140rpx;
+  left: 15rpx;
+}
