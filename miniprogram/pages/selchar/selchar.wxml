@@ -1,0 +1,104 @@
+<!-- background -->
+<image 
+  src="https://pic.imgdb.cn/item/62d3d3a8f54cd3f9376f71bb.png" 
+  style="width: {{WindowWidth}}px; height: {{WindowHeight}}px; z-index: 0; position: fixed;"
+  >
+</image>
+
+<!-- Please sel your char -->
+<image
+  wx:if="{{!selChar}}"
+  src = 'https://s3.bmp.ovh/imgs/2022/07/17/ac36f7f223a8ea75.png'
+  style="width: {{WindowWidth / 1080 * 992}}px; height: {{WindowHeight / 1920 * 249}}px; z-index: 0; position: absolute; top: 10%; left: 0; right: 0; margin: auto;"
+  >
+</image>
+
+<!-- Please check your choice -->
+<image
+  wx:if="{{selChar}}"
+  src = 'https://s3.bmp.ovh/imgs/2022/07/17/87f8bae21e060462.png'
+  style="width: {{WindowWidth / 1080 * 992}}px; height: {{WindowHeight / 1920 * 249}}px; z-index: 0; position: absolute; top: 10%; left: 0; right: 0; margin: auto;"
+  >
+</image>
+
+<!-- havn't reach the 10w goal -->
+<image
+  wx:if="{{1}}"
+  src = 'https://s3.bmp.ovh/imgs/2022/07/17/d00938e6c7f99448.png'
+  style="width: {{WindowWidth / 1080 * 390}}px; height: {{WindowHeight / 1920 * 49}}px; z-index: 0; position: absolute; top: 6%; left: 0; right: 0; margin: auto;"
+  >
+</image>
+
+<!-- have reach the 10w goal -->
+<image
+  wx:if="{{0}}"
+  src = 'https://s3.bmp.ovh/imgs/2022/07/17/869739202136f75e.png'
+  style="width: {{WindowWidth / 1080 * 550}}px; height: {{WindowHeight / 1920 * 51}}px; z-index: 0; position: absolute; top: 6%; left: 0; right: 0; margin: auto;"
+  >
+</image>
+
+<!-- please make choice -->
+<image
+  wx:if="{{!selChar}}"
+  src = 'https://s3.bmp.ovh/imgs/2022/07/17/d8163e518ef46fd3.png'
+  style="width: {{WindowWidth / 1080 * 342}}px; height: {{WindowHeight / 1920 * 48}}px; z-index: 0; position: absolute; top: 26%; left: 0; right: 0; margin: auto;"
+  >
+</image>
+
+<!-- please check your choice -->
+<image
+  wx:if="{{selChar}}"
+  src = 'https://s3.bmp.ovh/imgs/2022/07/17/beece577856f80ba.png'
+  style="width: {{WindowWidth / 1080 * 342}}px; height: {{WindowHeight / 1920 * 48}}px; z-index: 0; position: absolute; top: 26%; left: 0; right: 0; margin: auto;"
+  >
+</image>
+
+<!-- ok -->
+<button
+  wx:if="{{selChar}}"
+  style = "background-image: url(https://s3.bmp.ovh/imgs/2022/07/17/2627bd915d34471a.png); background-size: {{WindowWidth / 1080 * 369}}px {{WindowHeight / 1920 * 167}}px; width: {{WindowWidth / 1080 * 369}}px; height: {{WindowHeight / 1920 * 167}}px; z-index: 2; position: absolute; top: 86%; left:10%"
+  bindtap = 'makeSureChoice'
+>
+</button>
+
+<!-- reset -->
+<button
+  wx:if="{{selChar}}"
+  style = "background-image: url(https://s3.bmp.ovh/imgs/2022/07/17/15b67858354f5a62.png); background-size: {{WindowWidth / 1080 * 369}}px {{WindowHeight / 1920 * 167}}px; width: {{WindowWidth / 1080 * 369}}px; height: {{WindowHeight / 1920 * 167}}px; z-index: 2; position: absolute; top: 86%; right:10%"
+  bindtap = 'resetChoice'
+>
+</button>
+
+<!-- boy before sel -->
+<image 
+  wx:if="{{!selChar}}"
+  src = 'https://s3.bmp.ovh/imgs/2022/07/17/857e90ab83aa457c.png'
+  style="width: {{WindowWidth / 1080 * 509}}px; height: {{WindowWidth / 1080 * 1438}}px; z-index: -1; position: absolute; bottom: 0; left: 3.6%; z-index: 1;"
+  bindtap = "selBoy"
+  >
+</image>
+
+<!-- girl before sel-->
+<image 
+  wx:if="{{!selChar}}"
+  src = 'https://s3.bmp.ovh/imgs/2022/07/17/95ec90d5cc81588f.png'
+  style="width: {{WindowWidth / 1080 * 508}}px; height: {{WindowWidth / 1080 * 1394}}px; z-index: -1; position: absolute; bottom: 0; right: 3.6%; z-index: 1;"
+  bindtap = "selGirl"
+  >
+</image>
+
+<!-- boy after sel -->
+<image 
+  wx:if="{{selChar == 1}}"
+  src = 'https://s3.bmp.ovh/imgs/2022/07/17/857e90ab83aa457c.png'
+  style="width: {{WindowWidth / 1080 * 509}}px; height: {{WindowWidth / 1080 * 1438}}px; z-index: -1; position: absolute; bottom: 0; left: 0; right: 0; margin: auto; z-index: 1;"
+  >
+</image>
+
+<!-- girl after sel-->
+<image 
+  wx:if="{{selChar == 2}}"
+  src = 'https://s3.bmp.ovh/imgs/2022/07/17/95ec90d5cc81588f.png'
+  style="width: {{WindowWidth / 1080 * 508}}px; height: {{WindowWidth / 1080 * 1394}}px; z-index: -1; position: absolute; bottom: 0; left: 0; right: 0; margin: auto; z-index: 1;"
+  >
+</image>

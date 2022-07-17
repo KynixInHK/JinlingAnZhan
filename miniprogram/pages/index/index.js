@@ -37,7 +37,7 @@ Page({
       await this.sleep(1000);
 
       wx.redirectTo({
-         url: '../menu/menu',
+         url: '../selchar/selchar',
       })
     }
 
@@ -122,8 +122,8 @@ Page({
       await this.sleep(1000);
 
       wx.redirectTo({
-        url: '../menu/menu',
-      })
+        url: '../selchar/selchar',
+     })
     }
 
     else {

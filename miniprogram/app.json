@@ -1,10 +1,12 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/selchar/selchar",
     "pages/menu/menu",
     "pages/main/main",
-    "pages/invitation/invitation",
     "pages/wordss/wordss",
+    "pages/invitation/invitation",
+    
     "pages/master/master"
   ],
   "window": {
