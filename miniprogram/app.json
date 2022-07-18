@@ -1,20 +1,15 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/selchar/selchar",
     "pages/menu/menu",
-    "pages/main/main",
+    "pages/index/index",
     "pages/wordss/wordss",
-<<<<<<< HEAD
-    "pages/invitation/invitation",
-    
-    "pages/master/master"
-=======
-    "pages/master/master",
-    "pages/science/science",
+    "pages/thanks/thanks",
+    "pages/main/main",
     "pages/files/files",
-    "pages/thanks/thanks"
->>>>>>> 50d6615885bc29b130bf551e2ce8ffa53af5a720
+    "pages/selchar/selchar",
+    "pages/invitation/invitation",
+    "pages/master/master",
+    "pages/science/science"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

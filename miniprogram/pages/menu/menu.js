@@ -13,6 +13,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    this.setData({WindowWidth: wx.getWindowInfo().screenWidth, WindowHeight: wx.getWindowInfo().screenHeight});
   },
 
   /**
@@ -62,5 +63,41 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+
+  goChapter0()
+  {
+    wx.navigateTo({
+      url: '../main/main?chapter=0',
+    })
+  },
+
+  goChapter1()
+  {
+    wx.navigateTo({
+      url: '../main/main?chapter=1',
+    })
+  },
+
+  goChapter2()
+  {
+    wx.navigateTo({
+      url: '../main/main?chapter=2',
+    })
+  },
+
+  goChapter3()
+  {
+    wx.navigateTo({
+      url: '../main/main?chapter=3',
+    })
+  },
+
+  goChapter4()
+  {
+    wx.navigateTo({
+      url: '../main/main?chapter=4',
+    })
   }
+  
 })

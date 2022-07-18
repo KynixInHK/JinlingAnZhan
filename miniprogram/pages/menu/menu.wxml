@@ -1,1 +1,54 @@
-<text>pages/menu/menu.wxml</text>
+<!-- background -->
+<image 
+  src="https://pic.imgdb.cn/item/62d3d3a8f54cd3f9376f71bb.png" 
+  style="width: {{WindowWidth}}px; height: {{WindowHeight}}px; z-index: 0; position: fixed;"
+  >
+</image>
+
+<!-- contents icon -->
+<image
+  wx:if="{{!selChar}}"
+  src = 'https://s3.bmp.ovh/imgs/2022/07/18/a3112d3aa752b92c.png'
+  style="width: {{WindowWidth / 1080 * 407}}px; height: {{WindowHeight / 1920 * 185}}px; z-index: 1; position: absolute; top: 10%; left: 0; right: 0; margin: auto;"
+  >
+</image>
+
+<!-- Chapter 0 -->
+<image
+  src = 'https://s3.bmp.ovh/imgs/2022/07/18/4cd7b4b785aaa2ff.png'
+  style="width: {{WindowWidth / 1080 * 723}}px; height: {{WindowHeight / 1920 * 131}}px; z-index: 2; position: absolute; top: 30%; left: 0; right: 0; margin: auto;"
+  bindtap = 'goChapter0'
+  >
+</image>
+
+<!-- Chapter 1 -->
+<image
+  src = 'https://s3.bmp.ovh/imgs/2022/07/18/448bd8184368d452.png'
+  style="width: {{WindowWidth / 1080 * 950}}px; height: {{WindowHeight / 1920 * 132}}px; z-index: 2; position: absolute; top: 40%; left: 0; right: 0; margin: auto;"
+  bindtap = 'goChapter1'
+  >
+</image>
+
+<!-- Chapter 2 -->
+<image
+  src = 'https://s3.bmp.ovh/imgs/2022/07/18/e1dfc50fb1b67c4a.png'
+  style="width: {{WindowWidth / 1080 * 954}}px; height: {{WindowHeight / 1920 * 136}}px; z-index: 2; position: absolute; top: 50%; left: 0; right: 0; margin: auto;"
+  bindtap = 'goChapter2'
+  >
+</image>
+
+<!-- Chapter 3 -->
+<image
+  src = 'https://s3.bmp.ovh/imgs/2022/07/18/c40803f268523510.png'
+  style="width: {{WindowWidth / 1080 * 953}}px; height: {{WindowHeight / 1920 * 133}}px; z-index: 2; position: absolute; top: 60%; left: 0; right: 0; margin: auto;"
+  bindtap = 'goChapter3'
+  >
+</image>
+
+<!-- Chapter 4 -->
+<image
+  src = 'https://s3.bmp.ovh/imgs/2022/07/18/a1b12771e7f51c44.png'
+  style="width: {{WindowWidth / 1080 * 841}}px; height: {{WindowHeight / 1920 * 131}}px; z-index: 2; position: absolute; top: 70%; left: 0; right: 0; margin: auto;"
+  bindtap = 'goChapter4'
+  >
+</image>
