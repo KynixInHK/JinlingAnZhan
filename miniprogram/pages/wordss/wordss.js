@@ -1,3 +1,5 @@
+const db = wx.cloud.database()
+const cl = db.collection('Story')
 // pages/wordss/wordss.js
 Page({
 
@@ -7,7 +9,13 @@ Page({
   data: {
     WindowWidth: 0,
     WindowHeight: 0,
-    inputUrl: "https://pic.imgdb.cn/item/62d3d013f54cd3f9376946b1.png"
+    inputUrl: "https://pic.imgdb.cn/item/62d3d013f54cd3f9376946b1.png",
+    chapter: 0,
+    step: 1,
+    type: '1',
+    title: '邀请函',
+    content: '',
+    isHidden: true
   },
 
   /**
@@ -16,6 +24,22 @@ Page({
   onLoad(options) {
     let that = this
     this.setData({WindowWidth: wx.getWindowInfo().screenWidth, WindowHeight: wx.getWindowInfo().screenHeight});
+    // 设定跳转的章节和步骤
+    this.setData({
+      chapter: parseInt(options.chapter),
+      step: parseInt(options.step)
+    })
+    cl.where({
+      chapter: this.data.chapter,
+      step: this.data.step
+    }).get()
+    .then((res) => {
+      // console.log(res)
+      this.setData({
+        content: res.data[0].content,
+        type: res.data[0].type
+      })
+    })
   },
 
   /**

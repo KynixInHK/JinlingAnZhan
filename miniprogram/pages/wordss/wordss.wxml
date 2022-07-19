@@ -6,7 +6,7 @@
 <image class="tool" id="bao" mode="widthFix" src="https://s3.bmp.ovh/imgs/2022/07/17/660754f9d92855a7.png"></image>
 <image class="tool" id="juan" mode="widthFix" src="https://pic.imgdb.cn/item/62d3cd4af54cd3f9376487b8.png"></image>
 <view class="content">
-  <p>你在档案馆数字档案检索系统中以“驻华大使、汽车遇袭、飞机”为关键词进行检索，发现了一份相应的会议记录档案。你查看会议记录，发现其中除了会议内容的记录还有一张多人合照，由于保存不善部分合照人员已无法辨识，你自行观察会议记录和与会人员合照，推测出重要的与会人员。</p>
+  <p>{{content}}</p>
 </view>
 <view class="inputBox">
   <image mode="widthFix" src="{{inputUrl}}"></image>

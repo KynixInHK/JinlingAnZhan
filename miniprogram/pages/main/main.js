@@ -48,9 +48,9 @@ Page({
     // 开始计时
     setTimeout(() => {
       wx.redirectTo({
-        url: './../invitation/invitation',
+        url: './../wordss/wordss?chapter=' + this.data.id + '&step=1',
       })
-    }, 10000)
+    }, 5000)
   },
 
   /**
