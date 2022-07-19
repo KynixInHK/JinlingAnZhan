@@ -1,0 +1,21 @@
+<!-- 此页面是用于填充数据库的管理者页面，切记不要开放给用户通往该页面的路由！ -->
+<view class="block"></view>
+<view id="chapter">chapter:</view>
+<radio-group bindchange="selectChapter">
+  <radio value="0">0</radio>
+  <radio value="1">1</radio>
+  <radio value="2">2</radio>
+  <radio value="3">3</radio>
+  <radio value="4">4</radio>
+</radio-group>
+<view id="content">content:</view>
+<textarea cols="30" rows="10" maxlength="-1" bindinput="getContent"></textarea>
+<view id="step">step:</view>
+<input type="text" bindinput="getStep"/>
+<view id="type">type:</view>
+<radio-group bindchange="selectType">
+  <radio value="1">1</radio>
+  <radio value="2">2</radio>
+  <radio value="3">3</radio>
+</radio-group>
+<button id="submit" type="primary" bindtap="submit">提交</button>

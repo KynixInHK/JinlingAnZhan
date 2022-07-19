@@ -40,7 +40,8 @@ Page({
          url: '../selchar/selchar',
       })
     }
-
+    // 储存openid以备用
+    wx.setStorageSync('openId', this.data.openId)
   },
 
   getOpenId() {

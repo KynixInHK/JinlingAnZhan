@@ -114,6 +114,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "admin",
+          "pathName": "pages/admin/admin",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

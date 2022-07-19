@@ -9,7 +9,8 @@
     "pages/selchar/selchar",
     "pages/invitation/invitation",
     "pages/master/master",
-    "pages/science/science"
+    "pages/science/science",
+    "pages/admin/admin"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
