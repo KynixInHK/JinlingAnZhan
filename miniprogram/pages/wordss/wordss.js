@@ -1,5 +1,6 @@
 const db = wx.cloud.database()
 const cl = db.collection('Story')
+const cl_qa = db.collection('QuestionsAndAnswers')
 let app = getApp()
 // pages/wordss/wordss.js
 Page({
@@ -16,16 +17,22 @@ Page({
     type: '1',
     title: '邀请函',
     content: '',
-    notHidden: true
+    notHidden: true,
+    placeholder: '',
+    value: '',
+    answer: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log(options)
     let that = this
     this.setData({WindowWidth: wx.getWindowInfo().screenWidth, WindowHeight: wx.getWindowInfo().screenHeight});
+    that.setData({
+      value: '',
+      inputUrl: 'https://pic.imgdb.cn/item/62d3d013f54cd3f9376946b1.png'
+    })
     // 设定跳转的章节和步骤
     this.setData({
       chapter: parseInt(options.chapter),
@@ -40,22 +47,30 @@ Page({
         content: res.data[0].content,
         type: res.data[0].type
       })
+          // 设置是否隐藏下方的框框
+      if(this.data.type !== '3') {
+        this.setData({
+          notHidden: false
+        }) // 隐藏框框
+      } else {
+        cl_qa.where({
+          chapter: this.data.chapter,
+          step: this.data.step
+        }).get()
+        .then((res)=> {
+          this.setData({
+            notHidden: true,
+            placeholder: res.data[0].question,
+            answer: res.data[0].answer
+          })
+        })
+      }
     })
     // 设置标题
     const title = app.getChapterName(this.data.chapter)
     this.setData({
       title: title
     })
-    // 设置是否隐藏下方的框框
-    if(this.data.type !== '3') {
-      this.setData({
-        notHidden: false
-      }) // 隐藏框框
-    } else {
-      this.setData({
-        notHidden: true
-      })
-    }
   },
 
   /**
@@ -111,55 +126,54 @@ Page({
    * 自定义方法
    */
   nextPage() {
-    console.log(this.data)
-    // 获取下一页的内容
-    cl.where({
-      chapter: this.data.chapter,
-      step: this.data.step + 1
-    }).get()
-    .then((res) => {
-      if(res.data.length === 0) { // 如果到了本章的最后一节
-        if(this.data.chapter !== 4) { // 如果不是最后一章
-          cl.where({
-            chapter: this.data.chapter + 1,
-            step: 1
-          }).get()
-          .then((res) => {
-            this.setData({
-              title: app.getChapterName(this.data.chapter + 1),
-              content: res.data[0].content,
-              chapter: this.data.chapter + 1,
-              step: 1
+    if((this.data.type === '3' && this.data.value === this.data.answer) || this.data.type !== '3') { // 如果输入了正确的答案
+      cl.where({
+        chapter: this.data.chapter,
+        step: this.data.step + 1
+      }).get()
+      .then((res) => {
+        if(res.data.length === 0) { // 如果到了本章的最后一节
+          if(this.data.chapter !== 4) { // 如果不是最后一章
+            this.onLoad({chapter: this.data.chapter + 1, step: 1})
+          } else { // 如果是最后一章
+            wx.redirectTo({
+              url: './../thanks/thanks',
             })
-          })
-        } else { // 如果是最后一章
-          wx.redirectTo({
-            url: './../thanks/thanks',
-          })
+          }
+        }else { // 如果不是本章的最后一节
+          if(res.data[0].type === '2') {
+            wx.redirectTo({ // 跳转到主剧情页面
+              url: './../master/master?chapter=' + this.data.chapter + '&step=' + res.data[0].step + '&content=' + res.data[0].content,
+            })
+          }else if(res.data[0].type === '1') {
+            this.onLoad({chapter: this.data.chapter, step: this.data.step + 1})
+          }else if(res.data[0].type === '3') {
+            this.onLoad({chapter: this.data.chapter, step: this.data.step + 1})
+            // this.setData({
+            //   step: res.data[0].step,
+            //   content: res.data[0].content
+            // })
+            // cl_qa.where({
+            //   chapter: this.data.chapter,
+            //   step: this.data.step
+            // }).get()
+            // .then((res)=> {
+            //   this.setData({
+            //     notHidden: true,
+            //     placeholder: res.data[0].question
+            //   })
+            // })
+          }
         }
-      }else { // 如果不是本章的最后一节
-        if(res.data[0].type === '2') {
-          wx.redirectTo({ // 跳转到主剧情页面
-            url: './../master/master?chapter=' + this.data.chapter + '&step=' + res.data[0].step + '&content=' + res.data[0].content,
-          })
-        }else if(res.data[0].type === '1') {
-          this.setData({
-            step: res.data[0].step,
-            content: res.data[0].content,
-            notHidden: false
-          })
-        }else if(res.data[0].type === '3') {
-          this.setData({
-            step: res.data[0].step,
-            content: res.data[0].content,
-            notHidden: true
-          })
-        }
-      }
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }else {
+      this.setData({
+        inputUrl: 'https://pic.imgdb.cn/item/62d7c764f54cd3f937f1eed5.png'
+      })
+    }
   },
   toFiles() {
     wx.redirectTo({
@@ -169,6 +183,11 @@ Page({
   toMenu() {
     wx.redirectTo({
       url: './../menu/menu',
+    })
+  },
+  changeValue(e) {
+    this.setData({
+      value: e.detail.value
     })
   }
 })

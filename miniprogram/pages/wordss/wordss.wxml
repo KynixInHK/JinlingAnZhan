@@ -10,5 +10,5 @@
 </view>
 <view class="inputBox" wx:if="{{notHidden}}">
   <image mode="widthFix" src="{{inputUrl}}"></image>
-  <input type="text" placeholder="输入重要与会人员的名字" style="width: 500rpx"/>
+  <input type="text" placeholder="{{placeholder}}" style="width: 500rpx" bindinput="changeValue" value="{{value}}"/>
 </view>

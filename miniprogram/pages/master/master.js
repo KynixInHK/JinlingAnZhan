@@ -97,7 +97,6 @@ Page({
       step: this.data.step + 1
     }).get()
     .then((res) => {
-      console.log(res)
       if(res.data.length === 0) { // 如果到了本章的最后一节
         if(this.data.chapter !== 4) { // 如果不是最后一章
           cl.where({
