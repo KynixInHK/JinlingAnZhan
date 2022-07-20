@@ -176,12 +176,12 @@ Page({
     }
   },
   toFiles() {
-    wx.redirectTo({
+    wx.navigateTo({
       url: './../files/files',
     })
   },
   toMenu() {
-    wx.redirectTo({
+    wx.navigateTo({
       url: './../menu/menu',
     })
   },

@@ -5,4 +5,4 @@
   <view>文件中心</view>
 </view>
 
-<image src="https://pic.imgdb.cn/item/62d3ecc7f54cd3f937977c05.png" mode="widthFix" style="width: 100rpx;" id="back"></image>
+<image src="https://pic.imgdb.cn/item/62d3ecc7f54cd3f937977c05.png" mode="widthFix" style="width: 100rpx;" id="back" bindtap="back"></image>

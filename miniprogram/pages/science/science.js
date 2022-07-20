@@ -64,5 +64,13 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+  /**
+   * 自定义方法
+   */
+  back() {
+    wx.navigateBack({
+      delta: 1,
+    })
   }
 })

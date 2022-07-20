@@ -93,5 +93,10 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+  startGame() {
+    wx.redirectTo({
+      url: './../wordss/wordss?chapter=' + this.data.id + '&step=1',
+    })
   }
 })

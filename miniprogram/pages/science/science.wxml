@@ -5,7 +5,7 @@
   <view>口述档案</view>
 </view>
 
-<image src="https://pic.imgdb.cn/item/62d3ecc7f54cd3f937977c05.png" mode="widthFix" style="width: 100rpx;" id="back"></image>
+<image src="https://pic.imgdb.cn/item/62d3ecc7f54cd3f937977c05.png" mode="widthFix" style="width: 100rpx;" id="back" bindtap="back"></image>
 
 <view class="content">
   <p>口述档案在1984年的国际档案理事会所出版的《档案术语词典》中被定义为：“为研究利用而对个人进行有计划的采访的结果，通常为录音或录音的逐字记录形式。”</p>
