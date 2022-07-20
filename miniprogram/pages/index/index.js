@@ -121,7 +121,7 @@ Page({
       });
 
       await this.sleep(1000);
-
+      
       wx.redirectTo({
         url: './../selchar/selchar',
      })
