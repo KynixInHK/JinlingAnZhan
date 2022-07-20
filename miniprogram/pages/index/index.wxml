@@ -1,5 +1,5 @@
 <image
-  src = 'https://s3.bmp.ovh/imgs/2022/07/15/c07b748ec4083f5d.png'
+  src = 'https://s3.bmp.ovh/imgs/2022/07/20/0ac29925dc89f88f.png'
   style= "width: {{WindowWidth}}px; height: {{WindowHeight}}px; z-index: 0;"
   >
 </image>
@@ -19,7 +19,6 @@
 </input>
 
 <button
-  src = ''
   style = "background-image: url(https://s3.bmp.ovh/imgs/2022/07/15/7c862bd1b1d99ee8.png); background-size: {{WindowWidth / 1080 * 290}}px {{WindowHeight / 1920 * 111}}px; width: {{WindowWidth / 1080 * 290}}px; height: {{WindowHeight / 1920 * 111}}px; z-index: 2; position: absolute; top: 58%; left: 0; right: 0; margin: auto;"
   formType = 'submit'
 >
