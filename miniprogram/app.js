@@ -17,5 +17,16 @@ App({
     this.globalData = {
       data: {}, // 页面同步数据，来自index
     };
+  },
+  getChapterName(e) {
+    let title
+    switch(e) {
+      case 0: title = '邀请函'; break
+      case 1: title = '风云骤起'; break
+      case 2: title = '雾里探花'; break
+      case 3: title = '峰回路转'; break
+      case 4: title = '未完待续'; break
+    }
+    return title
   }
 });

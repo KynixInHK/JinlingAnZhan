@@ -67,35 +67,35 @@ Page({
 
   goChapter0()
   {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../main/main?chapter=0',
     })
   },
 
   goChapter1()
   {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../main/main?chapter=1',
     })
   },
 
   goChapter2()
   {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../main/main?chapter=2',
     })
   },
 
   goChapter3()
   {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../main/main?chapter=3',
     })
   },
 
   goChapter4()
   {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../main/main?chapter=4',
     })
   }
