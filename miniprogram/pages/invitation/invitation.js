@@ -1,4 +1,8 @@
 // pages/invitation/invitation.js
+let app = getApp()
+const db = wx.cloud.database()
+const cl = db.collection('Story')
+const cl_invi = db.collection('Invitations')
 Page({
 
   /**
@@ -6,7 +10,9 @@ Page({
    */
   data: {
     WindowWidth: 0,
-    WindowHeight: 0
+    WindowHeight: 0,
+    invi:{},
+    notHidden: false
   },
 
   /**
@@ -15,13 +21,27 @@ Page({
   onLoad(options) {
     let that = this
     this.setData({WindowWidth: wx.getWindowInfo().screenWidth, WindowHeight: wx.getWindowInfo().screenHeight});
+    if(options.chapter === '0' && options.step === '7') {
+      this.setData({
+        notHidden: true
+      })
+    }
+    cl_invi.where({
+      chapter: parseInt(options.chapter),
+      step: parseInt(options.step)
+    }).get()
+    .then((res) => {
+      that.setData({
+        invi: res.data[0]
+      })
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-
+    this.setData(app.globalData.data)
   },
 
   /**
@@ -64,5 +84,42 @@ Page({
    */
   onShareAppMessage() {
 
+  },
+  /**
+   * 自定义方法
+   */
+  nextPage() {
+    console.log(this.data.invi.step + 1)
+    const that = this
+    cl.where({
+      chapter: that.data.invi.chapter,
+      step: that.data.invi.step + 1
+    }).get()
+    .then((res) => {
+      if(res.data.length === 0) { // 到了本章的最后一节
+        if(that.data.invi.chapter !== 4) { // 如果不是最后一章
+          wx.redirectTo({
+            url: './../main/main?chapter=' + that.data.invi.chapter + 1,
+          })
+        } else { // 如果是最后一章
+          wx.redirectTo({
+            url: './../thanks/thanks',
+          })
+        }
+      } else {
+        if(res.data[0].type === '1' || res.data[0].type === '3') {
+          wx.redirectTo({
+            url: './../wordss/wordss?chapter=' + res.data[0].chapter + '&step=' + res.data[0].step,
+          })
+        }else {
+          wx.redirectTo({
+            url: './../master/master?chapter=' + res.data[0].chapter + '&step=' + res.data[0].step,
+          })
+        }
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 })

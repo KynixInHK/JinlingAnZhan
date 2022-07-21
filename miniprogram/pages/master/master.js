@@ -44,6 +44,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
+    this.setData(app.globalData.data)
   },
 
   /**
@@ -99,14 +100,8 @@ Page({
     .then((res) => {
       if(res.data.length === 0) { // 如果到了本章的最后一节
         if(this.data.chapter !== 4) { // 如果不是最后一章
-          cl.where({
-            chapter: this.data.chapter + 1,
-            step: 1
-          }).get()
-          .then((res) => {
-            wx.redirectTo({
-              url: './../wordss/wordss?chapter=' + (this.data.chapter + 1) + '&step=1',
-            })
+          wx.redirectTo({
+            url: './../main/main?chapter=' + (this.data.chapter + 1),
           })
         } else { // 如果是最后一章
           wx.redirectTo({

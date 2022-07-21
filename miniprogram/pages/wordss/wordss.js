@@ -2,6 +2,7 @@ const db = wx.cloud.database()
 const cl = db.collection('Story')
 const cl_qa = db.collection('QuestionsAndAnswers')
 let app = getApp()
+const cl_invi = db.collection('Invitations')
 // pages/wordss/wordss.js
 Page({
 
@@ -20,7 +21,8 @@ Page({
     notHidden: true,
     placeholder: '',
     value: '',
-    answer: ''
+    answer: '',
+    toInvi:[]
   },
 
   /**
@@ -32,6 +34,13 @@ Page({
     that.setData({
       value: '',
       inputUrl: 'https://pic.imgdb.cn/item/62d3d013f54cd3f9376946b1.png'
+    })
+    // 读取要跳转到Invitation页面的章节号
+    cl_invi.get()
+    .then((res) => {
+      that.setData({
+        toInvi: res.data
+      })
     })
     // 设定跳转的章节和步骤
     this.setData({
@@ -126,52 +135,56 @@ Page({
    * 自定义方法
    */
   nextPage() {
-    if((this.data.type === '3' && this.data.value === this.data.answer) || this.data.type !== '3') { // 如果输入了正确的答案
-      cl.where({
-        chapter: this.data.chapter,
-        step: this.data.step + 1
-      }).get()
-      .then((res) => {
-        if(res.data.length === 0) { // 如果到了本章的最后一节
-          if(this.data.chapter !== 4) { // 如果不是最后一章
-            this.onLoad({chapter: this.data.chapter + 1, step: 1})
-          } else { // 如果是最后一章
-            wx.redirectTo({
-              url: './../thanks/thanks',
-            })
+    var that = this
+    var flag = false
+    var index = 0
+    for(var i = 0;i < that.data.toInvi.length;i ++) {
+      if(that.data.chapter === that.data.toInvi[i].chapter && that.data.step === that.data.toInvi[i].step) {
+        flag = true
+        index = i
+        break
+      }
+    }
+    if(flag === false) {
+      if((this.data.type === '3' && this.data.value === this.data.answer) || this.data.type !== '3') { // 如果输入了正确的答案
+        cl.where({
+          chapter: this.data.chapter,
+          step: this.data.step + 1
+        }).get()
+        .then((res) => {
+          if(res.data.length === 0) { // 如果到了本章的最后一节
+            if(this.data.chapter !== 4) { // 如果不是最后一章
+              wx.redirectTo({
+                url: './../main/main?chapter=' + (this.data.chapter + 1),
+              })
+            } else { // 如果是最后一章
+              wx.redirectTo({
+                url: './../thanks/thanks',
+              })
+            }
+          }else { // 如果不是本章的最后一节
+            if(res.data[0].type === '2') {
+              wx.redirectTo({ // 跳转到主剧情页面
+                url: './../master/master?chapter=' + this.data.chapter + '&step=' + res.data[0].step + '&content=' + res.data[0].content,
+              })
+            }else if(res.data[0].type === '1') {
+              this.onLoad({chapter: this.data.chapter, step: this.data.step + 1})
+            }else if(res.data[0].type === '3') {
+              this.onLoad({chapter: this.data.chapter, step: this.data.step + 1})
+            }
           }
-        }else { // 如果不是本章的最后一节
-          if(res.data[0].type === '2') {
-            wx.redirectTo({ // 跳转到主剧情页面
-              url: './../master/master?chapter=' + this.data.chapter + '&step=' + res.data[0].step + '&content=' + res.data[0].content,
-            })
-          }else if(res.data[0].type === '1') {
-            this.onLoad({chapter: this.data.chapter, step: this.data.step + 1})
-          }else if(res.data[0].type === '3') {
-            this.onLoad({chapter: this.data.chapter, step: this.data.step + 1})
-            // this.setData({
-            //   step: res.data[0].step,
-            //   content: res.data[0].content
-            // })
-            // cl_qa.where({
-            //   chapter: this.data.chapter,
-            //   step: this.data.step
-            // }).get()
-            // .then((res)=> {
-            //   this.setData({
-            //     notHidden: true,
-            //     placeholder: res.data[0].question
-            //   })
-            // })
-          }
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      }else {
+        this.setData({
+          inputUrl: 'https://pic.imgdb.cn/item/62d7c764f54cd3f937f1eed5.png'
+        })
+      }
     }else {
-      this.setData({
-        inputUrl: 'https://pic.imgdb.cn/item/62d7c764f54cd3f937f1eed5.png'
+      wx.redirectTo({
+        url: './../invitation/invitation?chapter=' + this.data.chapter + '&step=' + this.data.step
       })
     }
   },

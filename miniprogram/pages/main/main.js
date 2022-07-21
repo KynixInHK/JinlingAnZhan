@@ -23,10 +23,11 @@ Page({
     let that = this
     this.setData({WindowWidth: wx.getWindowInfo().screenWidth, WindowHeight: wx.getWindowInfo().screenHeight});
     // 获取章节ID
-    console.log(typeof(parseInt(options.chapter)))
+    // console.log(typeof(parseInt(options.chapter)))
     this.setData({
       id: parseInt(options.chapter)
     })
+    console.log(this.data.id)
     // 显示章节名称
     cl.where({
       id: that.data.id 

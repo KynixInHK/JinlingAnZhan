@@ -1,13 +1,15 @@
-<image id="background" src="https://s3.bmp.ovh/imgs/2022/07/17/c914e9954dc76df4.png" style="width: {{WindowWidth}}px; height: {{WindowHeight}}px;"></image>
-<image id="paper" src="https://s3.bmp.ovh/imgs/2022/07/17/ba242da527e83d3f.png" mode="widthFix"></image>
-<view id="content">
-  <p>亲爱的朋友，恭喜你正式成为档案馆的员工，让我们开始今天的工作吧。</p>
-  <p>今天你的工作是整理1937年的档案。为什么是1937年？因为我们之前在修复1937年的《申报》时，发现了一些属于那个年代的档案，而这些尘封已久的档案全部指向于一宗外国人遇难事件。令人费解的是，1937的中国正是多事之秋，间谍与密报、爆炸与轰鸣、暗杀与袭击，暗流汹涌、波诡云谲……这种事件本应司空见惯，却引来人们大肆报道。这些档案的背后仿佛有一个影子，飘忽在真相与谎言之间。现邀请你一同破解谜案。</p>
-  <p>请时刻记住，你的身份是一名档案员，在调查事件的同时，你也应注意档案的搜寻与整理，抽丝剥茧，寻找档案之间的联系，探寻事件的真相，将迟到几十年的真相带回今天。</p>
-  <p>请点击下方按钮开始破案。</p>
-  <view id="sign" style="text-align: right; line-height: 60rpx;">神秘人</view>
+<image id="background" src="https://pic.imgdb.cn/item/62d3e9c5f54cd3f93792d831.png" style="width: {{WindowWidth}}px; height: {{WindowHeight}}px;"></image>
+<view class="title">
+  <image mode="widthFix" src="https://pic.imgdb.cn/item/62d3ea5cf54cd3f93793a31b.png" style="width: 400rpx;"></image>
+  <view>{{invi.title}}</view>
 </view>
-<view id="buttonBox">
+<image id="paper" src="https://s3.bmp.ovh/imgs/2022/07/17/ba242da527e83d3f.png" mode="widthFix" bindtap="nextPage"></image>
+<view id="content">
+  <view id="at">{{invi.at}}</view>
+  <p wx:for="{{invi.content}}" wx:key="index">{{item}}</p>
+  <view id="sign" style="text-align: right; line-height: 60rpx;">{{invi.signature}}</view>
+</view>
+<view id="buttonBox" wx:if="{{notHidden}}">
   <image src="https://s3.bmp.ovh/imgs/2022/07/17/433d0a61b3f7040f.png" mode="widthFix" style="width: 400rpx;"></image>
-  <view id="start">开始游戏</view>
+  <view id="start" bindtap="nextPage">开始游戏</view>
 </view>
