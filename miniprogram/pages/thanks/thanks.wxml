@@ -1,5 +1,21 @@
 <image id="background" src="https://pic.imgdb.cn/item/62d3f146f54cd3f9379db815.png" style="width: {{WindowWidth}}px; height: {{WindowHeight}}px; z-index: -1; position: fixed;"></image>
-<view class="content">
+<view class="content" wx:if="{{show}}">
   <p>感谢众筹期间购买者的支持，让城建游戏局的这项历史档案桌面游戏成功发行，为历史档案的宣传贡献一份力量。</p>
   <p>面对浩如烟海的历史档案，档案工作者对它们的开发从未止步，对历史的探索从未停止！</p>
+</view>
+
+<view class="content2" wx:if="{{!show}}">
+  <view>主创团队</view>
+  <ul>
+    <li>程佩璇（组长）</li>
+    <li>陈建（指导老师）</li>
+    <li>陈萌雨</li>
+    <li>吴琳琳</li>
+    <li>连培清</li>
+    <li>王靖萱</li>
+  </ul>
+  <view class="block"></view>
+  <view>听说我们的精彩</view>
+  <view>远不止这些</view>
+  <view>请继续期待吧！</view>
 </view>

@@ -47,6 +47,8 @@ Page({
       chapter: parseInt(options.chapter),
       step: parseInt(options.step)
     })
+    // 设定缓存
+    wx.setStorageSync('footstep', {chapter: this.data.chapter, step: this.data.step})
     cl.where({
       chapter: this.data.chapter,
       step: this.data.step
@@ -93,7 +95,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    if(this.data.type !== '3') {
+      setTimeout(()=> {
+        this.nextPage()
+      }, 30000)
+    }
   },
 
   /**
@@ -202,5 +208,11 @@ Page({
     this.setData({
       value: e.detail.value
     })
+    console.log(this.data.value)
+    if(this.data.value !== '') {
+      setTimeout(()=> {
+        this.nextPage()
+      },10000)
+    }
   }
 })

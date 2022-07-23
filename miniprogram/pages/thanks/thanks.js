@@ -6,7 +6,8 @@ Page({
    */
   data: {
     WindowWidth: 0,
-    WindowHeight: 0
+    WindowHeight: 0,
+    show: true
   },
 
   /**
@@ -28,7 +29,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    setTimeout(()=>{
+      this.setData({
+        show: false
+      })
+    },30000)
   },
 
   /**

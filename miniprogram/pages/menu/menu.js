@@ -1,5 +1,7 @@
 // pages/menu/menu.js
 const app = getApp();
+const db = wx.cloud.database();
+const cl = db.collection('Story');
 Page({
 
   /**
@@ -14,6 +16,19 @@ Page({
    */
   onLoad(options) {
     this.setData({WindowWidth: wx.getWindowInfo().screenWidth, WindowHeight: wx.getWindowInfo().screenHeight});
+    let footstep = wx.getStorageSync('footstep')
+    // console.log(typeof(footstep.chapter))
+    if(footstep === null || footstep === '' || footstep === undefined) {
+      setTimeout(()=>{
+        wx.redirectTo({
+          url: './../main/main?chapter=0',
+        })
+      },30000)
+    }else {
+      setTimeout(()=> {
+        this.getRedirectUrl(footstep.chapter, footstep.step)
+      },30000)
+    }
   },
 
   /**
@@ -64,7 +79,9 @@ Page({
   onShareAppMessage() {
 
   },
-
+  /**
+   * 自定义方法
+   */
   goChapter0()
   {
     wx.redirectTo({
@@ -97,6 +114,24 @@ Page({
   {
     wx.redirectTo({
       url: '../main/main?chapter=4',
+    })
+  },
+  
+  getRedirectUrl(chapter, step) {
+    cl.where({
+      chapter: chapter,
+      step: step
+    }).get()
+    .then((res) => {
+      if(res.data[0].type === '2') {
+        wx.redirectTo({
+          url: './../master/master?chapter=' + res.data[0].chapter + '&step=' + res.data[0].step + '&content=' + res.data[0].content,
+        })
+      } else {
+        wx.redirectTo({
+          url: './../wordss/wordss?chapter=' + res.data[0].chapter + '&step=' + res.data[0].step,
+        })
+      }
     })
   }
   

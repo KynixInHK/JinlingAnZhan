@@ -17,3 +17,22 @@
 p {
   display: block;
 }
+.content2 {
+  width: 500rpx;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 250rpx;
+  line-height: 2em;
+  font-size: 36rpx;
+  text-align: center;
+}
+.block {
+  height: 50rpx;
+}
+li {
+  display: block;
+}
+.content2 view {
+  font-weight: bold;
+}

@@ -37,7 +37,8 @@ Page({
       chapter: parseInt(option.chapter),
       step: parseInt(option.step)
     })
-    // console.log(this.data.title)
+    // 设定缓存
+    wx.setStorageSync('footstep', {chapter: this.data.chapter, step: this.data.step})
   },
 
   /**
@@ -51,7 +52,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    setTimeout(()=> {
+      this.nextPage()
+    }, 30000)
   },
 
   /**
