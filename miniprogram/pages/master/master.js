@@ -14,7 +14,7 @@ Page({
     title: '',
     content: '',
     chapter: 0,
-    step: 1
+    step: 1,
   },
 
   /**
@@ -52,9 +52,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    setTimeout(()=> {
-      this.nextPage()
-    }, 30000)
+    // setTimeout(()=> {
+    //   this.nextPage()
+    // }, 30000)
+    // 别定时了，页面乱跳敲烦人
   },
 
   /**

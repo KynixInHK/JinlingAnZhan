@@ -1,5 +1,6 @@
 const db = wx.cloud.database();
 const cl = db.collection('User');
+const sc = db.collection('Science');
 
 const app = getApp();
 
@@ -13,6 +14,7 @@ Page({
     WindowWidth: 0,
     WindowHeight: 0,
     userData: {}, // 用户数据，字段详见云开发数据库
+    ScienceData: [],
   },
 
   async onLoad(options) {
@@ -23,6 +25,7 @@ Page({
     this.setData({WindowWidth: wx.getWindowInfo().screenWidth, WindowHeight: wx.getWindowInfo().screenHeight});
     await this.getOpenId();
     await this.getUserData();
+    await this.getScienceData();
     console.log('该用户数据：');
     console.log(this.data.userData);
     app.globalData.data = this.data; // 利用globalData同步各页面数据
@@ -92,6 +95,25 @@ Page({
       })
       .catch(e => {
         console.log("获取用户数据失败");
+        console.log(e);
+        resolve(1);
+      });
+    })
+  },
+
+  getScienceData()
+  {
+    return new Promise(resolve => {
+      sc.get() 
+      .then(res => {
+        console.log('Science:')
+        console.log(res.data);
+        res.data.sort((a, b)=>{ return a.num - b.num });
+        this.setData({ScienceData: res.data});
+        resolve(0);
+      })
+      .catch(e => {
+        console.log("获取Science数据失败");
         console.log(e);
         resolve(1);
       });

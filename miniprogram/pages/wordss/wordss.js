@@ -22,7 +22,8 @@ Page({
     placeholder: '',
     value: '',
     answer: '',
-    toInvi:[]
+    toInvi:[],
+    ScienceData:[], // 由index从数据库获取
   },
 
   /**
@@ -30,6 +31,7 @@ Page({
    */
   onLoad(options) {
     let that = this
+    this.setData(app.globalData.data);
     this.setData({WindowWidth: wx.getWindowInfo().screenWidth, WindowHeight: wx.getWindowInfo().screenHeight});
     that.setData({
       value: '',
@@ -214,5 +216,15 @@ Page({
         this.nextPage()
       },10000)
     }
+  },
+
+  // Edit by ASingleDog
+  toScience(e)
+  {
+    console.log("toScience:")
+    console.log(e.currentTarget.dataset.num);
+    wx.navigateTo({
+      url: '../science/science?num='+e.currentTarget.dataset.num,
+    })
   }
 })

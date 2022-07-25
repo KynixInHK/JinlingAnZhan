@@ -1,16 +1,18 @@
 {
   "pages": [
-    "pages/intro/intro",
     "pages/index/index",
-    "pages/menu/menu",
     "pages/wordss/wordss",
+    "pages/master/master",
+   
+    "pages/science/science",
+    "pages/intro/intro",
+    "pages/menu/menu",
+    
     "pages/thanks/thanks",
     "pages/main/main",
     "pages/files/files",
     "pages/selchar/selchar",
     "pages/invitation/invitation",
-    "pages/master/master",
-    "pages/science/science",
     "pages/admin/admin"
   ],
   "window": {

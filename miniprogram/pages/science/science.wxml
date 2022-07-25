@@ -1,13 +1,17 @@
+<!-- 档案袋 -->
 <image id="background" src="https://pic.imgdb.cn/item/62d3e9c5f54cd3f93792d831.png" style="width: {{WindowWidth}}px; height: {{WindowHeight}}px;"></image>
+<!-- 纸张 -->
 <image id="paper" src="https://s3.bmp.ovh/imgs/2022/07/17/ba242da527e83d3f.png" mode="widthFix"></image>
+
 <view class="box">
   <image src="https://pic.imgdb.cn/item/62d3ea5cf54cd3f93793a31b.png" mode="widthFix" style="width: 500rpx;"></image>
-  <view>口述档案</view>
+  <view>{{ScienceData[num].title}}</view>
 </view>
 
 <image src="https://pic.imgdb.cn/item/62d3ecc7f54cd3f937977c05.png" mode="widthFix" style="width: 100rpx;" id="back" bindtap="back"></image>
 
 <view class="content">
-  <p>口述档案在1984年的国际档案理事会所出版的《档案术语词典》中被定义为：“为研究利用而对个人进行有计划的采访的结果，通常为录音或录音的逐字记录形式。”</p>
-  <p>口述档案是以抢救和保护历史记忆为目的而存在的原始记录，从狭义来说只是口述史和口头传说调查的结果，表现形式通常为录音磁带、录像和其解释说明的文字信息；从广义上来说包括新闻采访、会议的录音等一切有保存价值的记录。</p>
+  <text>
+    {{ScienceData[num].content}}
+  </text>
 </view>

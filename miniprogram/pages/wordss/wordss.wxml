@@ -12,3 +12,15 @@
   <image mode="widthFix" src="{{inputUrl}}"></image>
   <input type="text" placeholder="{{placeholder}}" style="width: 500rpx" bindinput="changeValue" value="{{value}}"/>
 </view>
+
+
+<!-- Edit by ASingleDog -->
+<view wx:for="{{ScienceData}}" wx:if="{{item.chapter == chapter && item.step == step}}"
+  style="position: absolute; right: 10%; bottom: {{index % 3 * 60 + 300}}rpx; font-size: 40rpx;font-family: '华文行楷'; font-style:oblique; text-decoration:underline; color: darkred;"
+  data-num="{{item.num}}"
+  bindtap="toScience"
+  >
+  <text decode>
+    点击了解"{{item.title}}" 
+  </text>
+</view>

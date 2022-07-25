@@ -22,8 +22,9 @@
   font-size: 60rpx;
   font-family: '方正舒体';
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  margin: auto;
   top: 40rpx;
 }
 .content {
@@ -34,7 +35,7 @@
   top: 450rpx;
   text-indent: 2em;
 }
-p {
+text {
   display: block;
   line-height: 1.5em;
 }

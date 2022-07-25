@@ -1,4 +1,8 @@
-// pages/science/science.js
+const app = getApp();
+const db = wx.cloud.database();
+const cl = db.collection('User');
+const sc = db.collection('Science');
+
 Page({
 
   /**
@@ -6,15 +10,18 @@ Page({
    */
   data: {
     WindowWidth: 0,
-    WindowHeight: 0
+    WindowHeight: 0,
+    num:0, // 序号
+    ScienceData:[], // 来自index
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    let that = this
     this.setData({WindowWidth: wx.getWindowInfo().screenWidth, WindowHeight: wx.getWindowInfo().screenHeight});
+    this.setData(app.globalData.data);
+    this.setData({num:options.num});
   },
 
   /**
@@ -72,5 +79,5 @@ Page({
     wx.navigateBack({
       delta: 1,
     })
-  }
+  },
 })
