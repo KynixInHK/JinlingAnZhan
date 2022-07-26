@@ -7,7 +7,8 @@ Page({
   data: {
     WindowWidth: 0,
     WindowHeight: 0,
-    show: true
+    show: true,
+    set: ''
   },
 
   /**
@@ -29,11 +30,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    setTimeout(()=>{
+    let set = setTimeout(()=>{
       this.setData({
         show: false
       })
     },30000)
+    this.setData({
+      set: set
+    })
   },
 
   /**
@@ -47,7 +51,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-
+    clearTimeout(this.data.set)
   },
 
   /**

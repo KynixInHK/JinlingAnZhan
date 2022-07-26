@@ -24,6 +24,8 @@ Page({
     answer: '',
     toInvi:[],
     ScienceData:[], // 由index从数据库获取
+    showSet: '',
+    inputSet: ''
   },
 
   /**
@@ -98,9 +100,12 @@ Page({
    */
   onShow() {
     if(this.data.type !== '3') {
-      setTimeout(()=> {
+      let set = setTimeout(()=> {
         this.nextPage()
       }, 30000)
+      this.setData({
+        showSet: set
+      })
     }
   },
 
@@ -115,7 +120,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-
+    clearTimeout(this.data.showSet)
+    clearTimeout(this.data.inputSet)
   },
 
   /**
@@ -212,9 +218,12 @@ Page({
     })
     console.log(this.data.value)
     if(this.data.value !== '') {
-      setTimeout(()=> {
+      let set = setTimeout(()=> {
         this.nextPage()
       },10000)
+      this.setData({
+        inputSet: set
+      })
     }
   },
 

@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    set1: '',
+    set2: ''
   },
 
   /**
@@ -19,15 +20,21 @@ Page({
     let footstep = wx.getStorageSync('footstep')
     // console.log(typeof(footstep.chapter))
     if(footstep === null || footstep === '' || footstep === undefined) {
-      setTimeout(()=>{
+      let set1 = setTimeout(()=>{
         wx.redirectTo({
           url: './../main/main?chapter=0',
         })
       },30000)
+      this.setData({
+        set1: set1
+      })
     }else {
-      setTimeout(()=> {
+      let set2 = setTimeout(()=> {
         this.getRedirectUrl(footstep.chapter, footstep.step)
       },30000)
+      this.setData({
+        set2: set2
+      })
     }
   },
 
@@ -56,7 +63,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-
+    clearTimeout(this.data.set1)
+    clearTimeout(this.data.set2)
   },
 
   /**

@@ -13,7 +13,8 @@ Page({
     chapterNum : '序章',
     chapterName : '邀请函',
     id: 0,
-    step: 0
+    step: 0,
+    set: ''
   },
 
   /**
@@ -48,11 +49,14 @@ Page({
   onReady() {
     
     // 开始计时
-    setTimeout(() => {
+    let set = setTimeout(() => {
       wx.redirectTo({
         url: './../wordss/wordss?chapter=' + this.data.id + '&step=1',
       })
     }, 5000)
+    this.setData({
+      set: set
+    })
   },
 
   /**
@@ -73,7 +77,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-
+    clearTimeout(this.data.set)
   },
 
   /**

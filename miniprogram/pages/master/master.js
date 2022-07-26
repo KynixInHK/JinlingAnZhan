@@ -15,6 +15,7 @@ Page({
     content: '',
     chapter: 0,
     step: 1,
+    set: ''
   },
 
   /**
@@ -52,10 +53,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    // setTimeout(()=> {
-    //   this.nextPage()
-    // }, 30000)
-    // 别定时了，页面乱跳敲烦人
+    let set = setTimeout(()=> {
+      this.nextPage()
+    }, 30000)
+    this.setData({
+      set: set
+    })
   },
 
   /**
@@ -69,7 +72,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-
+    clearTimeout(this.data.set)
   },
 
   /**
