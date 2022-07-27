@@ -55,3 +55,32 @@ input {
   left: 50%;
   transform: translateX(-50%);
 }
+.tips {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 35%;
+  width: 600rpx;
+  height: 200rpx;
+  background-color: #fff;
+  text-align: center;
+  line-height: 200rpx;
+  padding: 50rpx;
+  border-radius: 50rpx;
+  border: #000 2px solid;
+}
+.cover {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 10000;
+}
+#covercover {
+  opacity: 80%;
+}
+.content image {
+  width: 600rpx;
+  position: relative;
+  left: 50%;
+  transform: translateX(-63%);
+}

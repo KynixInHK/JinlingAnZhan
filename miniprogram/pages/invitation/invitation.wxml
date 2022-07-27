@@ -13,3 +13,5 @@
   <image src="https://s3.bmp.ovh/imgs/2022/07/17/433d0a61b3f7040f.png" mode="widthFix" style="width: 400rpx;"></image>
   <view id="start" bindtap="nextPage">开始游戏</view>
 </view>
+<view class="tips" wx:if="{{zhongchou}}">众筹二十万福利：<span style="color: red;">南造云子视角</span>有待解锁</view>
+<view class="cover" wx:if="{{zhongchou}}" bindtap="nextPage"></view>

@@ -1,4 +1,5 @@
-<image id="background" src="https://s3.bmp.ovh/imgs/2022/07/17/44fcb924b8b7e4ab.png" style="width: {{WindowWidth}}px; height: {{WindowHeight}}px; z-index: -1; position: fixed;" bindtap="nextPage"></image>
+<image id="background" src="{{backUrl}}" style="width: {{WindowWidth}}px; height: {{WindowHeight}}px; z-index: -1; position: fixed;" bindtap="nextPage"></image>
+<image id="covercover" src="{{coverUrl}}" style="width: {{WindowWidth}}px; height: {{WindowHeight}}px; z-index: 0; position: fixed;" bindtap="nextPage" wx:if="{{isCover}}"></image>
 <view class="box" bindtap="nextPage">
   <image src="https://s3.bmp.ovh/imgs/2022/07/17/80aead74f3456396.png" mode="widthFix" style="width: 450rpx;"></image>
   <view>{{title}}</view>
@@ -6,12 +7,17 @@
 <image class="tool" id="bao" mode="widthFix" src="https://s3.bmp.ovh/imgs/2022/07/17/660754f9d92855a7.png" bindtap="toFiles"></image>
 <image class="tool" id="juan" mode="widthFix" src="https://pic.imgdb.cn/item/62d3cd4af54cd3f9376487b8.png" bindtap="toMenu"></image>
 <view class="content" bindtap="nextPage">
+  <image mode="widthFix" src="{{imageUrl}}" wx:if="{{haveImage}}"></image>
   <p>{{content}}</p>
 </view>
 <view class="inputBox" wx:if="{{notHidden}}">
   <image mode="widthFix" src="{{inputUrl}}"></image>
   <input type="text" placeholder="{{placeholder}}" style="width: 500rpx" bindinput="changeValue" value="{{value}}"/>
 </view>
+<view class="tips" wx:if="{{zhongchou1}}">众筹十万福利：<span style="color: red;">周渠和莲花的故事</span>有待解锁</view>
+<view class="tips" wx:if="{{zhongchou2}}">众筹五万福利：<span style="color: red;">南造云子番外</span>有待解锁</view>
+<view class="cover" wx:if="{{zhongchou1}}" bindtap="nextPage"></view>
+<view class="cover" wx:if="{{zhongchou1}}" bindtap="nextPage"></view>
 
 
 <!-- Edit by ASingleDog -->

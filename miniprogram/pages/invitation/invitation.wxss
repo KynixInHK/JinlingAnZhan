@@ -52,3 +52,22 @@ p {
 #at {
   text-indent: 0em;
 }
+.tips {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 35%;
+  width: 600rpx;
+  height: 200rpx;
+  background-color: #fff;
+  text-align: center;
+  line-height: 200rpx;
+  padding: 50rpx;
+  border-radius: 50rpx;
+}
+.cover {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 1000;
+}

@@ -1,6 +1,7 @@
 const db = wx.cloud.database()
 const cl = db.collection('Story')
 const cl_qa = db.collection('QuestionsAndAnswers')
+const cl_bk = db.collection('Backgrounds')
 let app = getApp()
 const cl_invi = db.collection('Invitations')
 // pages/wordss/wordss.js
@@ -25,7 +26,15 @@ Page({
     toInvi:[],
     ScienceData:[], // 由index从数据库获取
     showSet: '',
-    inputSet: ''
+    inputSet: '',
+    zhongchou1: false,
+    zhongchou2: false,
+    times: 0,
+    backUrl: 'https://pic.rmb.bdstatic.com/bjh/bfb5e4c8ca0ed265c092e77f162f7bba.png',
+    coverUrl: 'https://pic.rmb.bdstatic.com/bjh/a2f36ae444fcb924b8b7e4ab912d0a9f.png',
+    isCover: false,
+    imageUrl: '',
+    haveImage: false
   },
 
   /**
@@ -38,6 +47,31 @@ Page({
     that.setData({
       value: '',
       inputUrl: 'https://pic.imgdb.cn/item/62d3d013f54cd3f9376946b1.png'
+    })
+    // 读取所有的背景图片
+    cl_bk.get()
+    .then((res) => {
+      // 根据chapterID来设置背景照片
+      if(this.data.chapter === 0 && this.data.step === 1) {
+        this.setData({
+          backUrl: res.data[1].url,
+          isCover: false
+        })
+      }else if(this.data.chapter === 0 && this.data.step !== 1) {
+        this.setData({
+          backUrl: res.data[0].url,
+          isCover: true
+        })
+      } else if(this.data.chapter === 4) {
+        this.setData({
+          backUrl: res.data[3].url,
+          isCover: true
+        })
+      }else {
+        this.setData({
+          backUrl: res.data[2].url
+        })
+      }
     })
     // 读取要跳转到Invitation页面的章节号
     cl_invi.get()
@@ -62,6 +96,12 @@ Page({
         content: res.data[0].content,
         type: res.data[0].type
       })
+      if(res.data[0].image !== '' && res.data[0].image !== null && res.data[0].image !== undefined) {
+        that.setData({
+          imageUrl: res.data[0].image,
+          haveImage: true
+        })
+      }
           // 设置是否隐藏下方的框框
       if(this.data.type !== '3') {
         this.setData({
@@ -99,14 +139,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    if(this.data.type !== '3') {
-      let set = setTimeout(()=> {
-        this.nextPage()
-      }, 30000)
-      this.setData({
-        showSet: set
-      })
-    }
+    // if(this.data.type !== '3') {
+    //   let set = setTimeout(()=> {
+    //     this.nextPage()
+    //   }, 30000)
+    //   this.setData({
+    //     showSet: set
+    //   })
+    // }else {
+    //   clearTimeout(this.data.showSet)
+    // }
   },
 
   /**
@@ -120,8 +162,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-    clearTimeout(this.data.showSet)
-    clearTimeout(this.data.inputSet)
+    // clearTimeout(this.data.showSet)
+    // clearTimeout(this.data.inputSet)
   },
 
   /**
@@ -159,48 +201,73 @@ Page({
         break
       }
     }
-    if(flag === false) {
-      if((this.data.type === '3' && this.data.value === this.data.answer) || this.data.type !== '3') { // 如果输入了正确的答案
-        cl.where({
-          chapter: this.data.chapter,
-          step: this.data.step + 1
-        }).get()
-        .then((res) => {
-          if(res.data.length === 0) { // 如果到了本章的最后一节
-            if(this.data.chapter !== 4) { // 如果不是最后一章
-              wx.redirectTo({
-                url: './../main/main?chapter=' + (this.data.chapter + 1),
-              })
-            } else { // 如果是最后一章
-              wx.redirectTo({
-                url: './../thanks/thanks',
-              })
-            }
-          }else { // 如果不是本章的最后一节
-            if(res.data[0].type === '2') {
-              wx.redirectTo({ // 跳转到主剧情页面
-                url: './../master/master?chapter=' + this.data.chapter + '&step=' + res.data[0].step + '&content=' + res.data[0].content,
-              })
-            }else if(res.data[0].type === '1') {
-              this.onLoad({chapter: this.data.chapter, step: this.data.step + 1})
-            }else if(res.data[0].type === '3') {
-              this.onLoad({chapter: this.data.chapter, step: this.data.step + 1})
-            }
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-      }else {
-        this.setData({
-          inputUrl: 'https://pic.imgdb.cn/item/62d7c764f54cd3f937f1eed5.png'
-        })
-      }
-    }else {
-      wx.redirectTo({
-        url: './../invitation/invitation?chapter=' + this.data.chapter + '&step=' + this.data.step
+    if((this.data.chapter === 3 && this.data.step === 37 && this.data.value === this.data.answer)) {
+      this.setData({
+        zhongchou2: true
       })
     }
+    if((this.data.chapter === 3 && this.data.step === 9 && this.data.value === this.data.answer)) {
+      this.setData({
+        zhongchou1: true
+      })
+    }
+    if((this.data.chapter === 3 && this.data.step === 9 && this.data.value !== this.data.answer) || (this.data.chapter === 3 && this.data.step === 37 && this.data.value !== this.data.answer)) {
+      this.setData({
+        inputUrl: 'https://pic.imgdb.cn/item/62d7c764f54cd3f937f1eed5.png'
+      })
+    }
+    if((this.data.chapter === 3 && this.data.step !== 9 && this.data.step !== 37) || (this.data.zhongchou1 === true  && this.data.times === 1) || (this.data.zhongchou2 === true && this.data.times === 1) || this.data.chapter !== 3) {
+      that.setData({
+        zhongchou1: false,
+        zhongchou2: false,
+        times: -1
+      })
+      if(flag === false) {
+        if((this.data.type === '3' && this.data.value === this.data.answer) || this.data.type !== '3') { // 如果输入了正确的答案
+          cl.where({
+            chapter: this.data.chapter,
+            step: this.data.step + 1
+          }).get()
+          .then((res) => {
+            if(res.data.length === 0) { // 如果到了本章的最后一节
+              if(this.data.chapter !== 4) { // 如果不是最后一章
+                wx.redirectTo({
+                  url: './../main/main?chapter=' + (this.data.chapter + 1),
+                })
+              } else { // 如果是最后一章
+                wx.redirectTo({
+                  url: './../thanks/thanks',
+                })
+              }
+            }else { // 如果不是本章的最后一节
+              if(res.data[0].type === '2') {
+                wx.redirectTo({ // 跳转到主剧情页面
+                  url: './../master/master?chapter=' + this.data.chapter + '&step=' + res.data[0].step + '&content=' + res.data[0].content,
+                })
+              }else if(res.data[0].type === '1') {
+                this.onLoad({chapter: this.data.chapter, step: this.data.step + 1})
+              }else if(res.data[0].type === '3') {
+                this.onLoad({chapter: this.data.chapter, step: this.data.step + 1})
+              }
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+        }else {
+          this.setData({
+            inputUrl: 'https://pic.imgdb.cn/item/62d7c764f54cd3f937f1eed5.png'
+          })
+        }
+      }else {
+        wx.redirectTo({
+          url: './../invitation/invitation?chapter=' + this.data.chapter + '&step=' + this.data.step
+        })
+      }
+    }
+    this.setData({
+      times: this.data.times +1
+    })
   },
   toFiles() {
     wx.navigateTo({
@@ -216,15 +283,15 @@ Page({
     this.setData({
       value: e.detail.value
     })
-    console.log(this.data.value)
-    if(this.data.value !== '') {
-      let set = setTimeout(()=> {
-        this.nextPage()
-      },10000)
-      this.setData({
-        inputSet: set
-      })
-    }
+    // console.log(this.data.value)
+    // if(this.data.value !== '') {
+    //   // let set = setTimeout(()=> {
+    //   //   this.nextPage()
+    //   // },10000)
+    //   // this.setData({
+    //   //   inputSet: set
+    //   // })
+    // }
   },
 
   // Edit by ASingleDog

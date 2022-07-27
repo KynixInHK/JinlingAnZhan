@@ -2,6 +2,7 @@
 let app = getApp()
 const db = wx.cloud.database()
 const cl = db.collection('Story')
+const cl_bk = db.collection('Backgrounds')
 Page({
 
   /**
@@ -15,7 +16,8 @@ Page({
     content: '',
     chapter: 0,
     step: 1,
-    set: ''
+    set: '',
+    backUrl: 'https://pic.imgdb.cn/item/62d3d3a8f54cd3f9376f71bb.png'
   },
 
   /**
@@ -32,6 +34,7 @@ Page({
       })
     }
     // 设置标题和content
+    console.log(option.content)
     this.setData({
       title: app.getChapterName(parseInt(option.chapter)),
       content: option.content,
@@ -40,6 +43,23 @@ Page({
     })
     // 设定缓存
     wx.setStorageSync('footstep', {chapter: this.data.chapter, step: this.data.step})
+    // 获取背景照片
+    cl_bk.get()
+    .then((res) => {
+      if(this.data.chapter === 0 && this.data.step === 2) {
+        this.setData({
+          backUrl: res.data[1].url
+        })
+      }else if (this.data.chapter === 4) {
+        this.setData({
+          backUrl: res.data[3].url
+        })
+      }else {
+        this.setData({
+          backUrl: res.data[0].url
+        })
+      }
+    })
   },
 
   /**
@@ -53,12 +73,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    let set = setTimeout(()=> {
-      this.nextPage()
-    }, 30000)
-    this.setData({
-      set: set
-    })
+    // let set = setTimeout(()=> {
+    //   this.nextPage()
+    // }, 30000)
+    // this.setData({
+    //   set: set
+    // })
   },
 
   /**
@@ -72,7 +92,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-    clearTimeout(this.data.set)
+    // clearTimeout(this.data.set)
   },
 
   /**

@@ -12,7 +12,8 @@ Page({
     WindowWidth: 0,
     WindowHeight: 0,
     invi:{},
-    notHidden: false
+    notHidden: false,
+    zhongchou: false
   },
 
   /**
@@ -91,35 +92,44 @@ Page({
   nextPage() {
     console.log(this.data.invi.step + 1)
     const that = this
-    cl.where({
-      chapter: that.data.invi.chapter,
-      step: that.data.invi.step + 1
-    }).get()
-    .then((res) => {
-      if(res.data.length === 0) { // 到了本章的最后一节
-        if(that.data.invi.chapter !== 4) { // 如果不是最后一章
-          wx.redirectTo({
-            url: './../main/main?chapter=' + that.data.invi.chapter + 1,
-          })
-        } else { // 如果是最后一章
-          wx.redirectTo({
-            url: './../thanks/thanks',
-          })
+    if((this.data.invi.chapter !== 0 && this.data.invi.step !== 7) || this.data.zhongchou === true) { // 如果不是邀请函的话
+      this.setData({
+        zhongchou: false
+      })
+      cl.where({
+        chapter: that.data.invi.chapter,
+        step: that.data.invi.step + 1
+      }).get()
+      .then((res) => {
+        if(res.data.length === 0) { // 到了本章的最后一节
+          if(that.data.invi.chapter !== 4) { // 如果不是最后一章
+            wx.redirectTo({
+              url: './../main/main?chapter=' + that.data.invi.chapter + 1,
+            })
+          } else { // 如果是最后一章
+            wx.redirectTo({
+              url: './../thanks/thanks',
+            })
+          }
+        } else {
+          if(res.data[0].type === '1' || res.data[0].type === '3') {
+            wx.redirectTo({
+              url: './../wordss/wordss?chapter=' + res.data[0].chapter + '&step=' + res.data[0].step,
+            })
+          }else {
+            wx.redirectTo({
+              url: './../master/master?chapter=' + res.data[0].chapter + '&step=' + res.data[0].step,
+            })
+          }
         }
-      } else {
-        if(res.data[0].type === '1' || res.data[0].type === '3') {
-          wx.redirectTo({
-            url: './../wordss/wordss?chapter=' + res.data[0].chapter + '&step=' + res.data[0].step,
-          })
-        }else {
-          wx.redirectTo({
-            url: './../master/master?chapter=' + res.data[0].chapter + '&step=' + res.data[0].step,
-          })
-        }
-      }
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }else { // 解锁二十万众筹福利
+      this.setData({
+        zhongchou: true
+      })
+    }
   }
 })
