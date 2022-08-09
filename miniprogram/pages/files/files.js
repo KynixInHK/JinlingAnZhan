@@ -1,4 +1,5 @@
 // pages/files/files.js
+const app = getApp()
 Page({
 
   /**
@@ -6,22 +7,24 @@ Page({
    */
   data: {
     WindowWidth: 0,
-    WindowHeight: 0
+    WindowHeight: 0,
+    userData:{unlockFiles:[1, 1, 1, 1, 1, 1, 1]}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    let that = this
+    this.setData(app.globalData.data);
     this.setData({WindowWidth: wx.getWindowInfo().screenWidth, WindowHeight: wx.getWindowInfo().screenHeight});
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-
+    this.setData(app.globalData.data);
   },
 
   /**
@@ -72,5 +75,12 @@ Page({
     wx.navigateBack({
       delta: 1,
     })
-  }
+  },
+  itemTapped(e)
+  {
+    wx.navigateTo({
+      url: `../filePrst/filePrst?id=${e.currentTarget.dataset.id}`,
+    })
+  },
+
 })

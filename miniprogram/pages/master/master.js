@@ -17,7 +17,20 @@ Page({
     chapter: 0,
     step: 1,
     set: '',
-    backUrl: 'https://pic.imgdb.cn/item/62d3d3a8f54cd3f9376f71bb.png'
+    // backUrl: 'https://pic.imgdb.cn/item/62d3d3a8f54cd3f9376f71bb.png'
+    backUrl:'',
+
+    // Edit by ASingleDog
+    // 档案解锁位置
+    FileLoc:[
+      {chapter:1, step:3},
+      {chapter:1, step:4},
+      {chapter:1, step:13},
+      {chapter:2, step:3},
+      {chapter:2, step:2},
+      {chapter:3, step:33},
+      {chapter:3, step:24}
+    ]
   },
 
   /**
@@ -60,13 +73,17 @@ Page({
         })
       }
     })
+
+    // Edit by ASingleDog
+    // 获取档案判定
+    this.getNewFile();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-    this.setData(app.globalData.data)
+    this.setData(app.globalData.data);
   },
 
   /**
@@ -157,5 +174,35 @@ Page({
     wx.navigateTo({
       url: './../menu/menu',
     })
-  }
+  },
+
+  // Edit by ASingleDog
+  // 判定是否获得新档案
+  getNewFile()
+  {
+    console.log({chapter:this.data.chapter, step:this.data.step})
+    let index = this.data.FileLoc.findIndex((element)=>element.chapter ==  this.data.chapter && element.step ==  this.data.step);
+    
+    if(index != -1)
+    {
+      let userData = this.data.userData;
+      if(userData.unlockFiles[index] != 1)
+      {
+        userData.unlockFiles[index] = 1;
+        this.setData({userData});
+        app.globalData.data=this.data;
+
+        const db = wx.cloud.database();
+        const userCl = db.collection('User');
+        userCl.where({openid:this.data.openId}).update({
+          data: {
+            unlockFiles:userData.unlockFiles
+          }
+        });
+        
+      }
+      
+    }
+  },
+
 })

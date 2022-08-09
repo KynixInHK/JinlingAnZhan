@@ -30,11 +30,24 @@ Page({
     zhongchou1: false,
     zhongchou2: false,
     times: 0,
-    backUrl: 'https://pic.rmb.bdstatic.com/bjh/bfb5e4c8ca0ed265c092e77f162f7bba.png',
+    // backUrl: 'https://pic.rmb.bdstatic.com/bjh/bfb5e4c8ca0ed265c092e77f162f7bba.png',
+    backUrl: '',
     coverUrl: 'https://pic.rmb.bdstatic.com/bjh/a2f36ae444fcb924b8b7e4ab912d0a9f.png',
     isCover: false,
     imageUrl: '',
-    haveImage: false
+    haveImage: false,
+
+    // Edit by ASingleDog
+    // 档案解锁位置
+    FileLoc:[
+      {chapter:1, step:3},
+      {chapter:1, step:4},
+      {chapter:1, step:13},
+      {chapter:2, step:3},
+      {chapter:2, step:2},
+      {chapter:3, step:33},
+      {chapter:3, step:24}
+    ]
   },
 
   /**
@@ -126,13 +139,17 @@ Page({
     this.setData({
       title: title
     })
+
+    // Edit by ASingleDog
+    // 获取档案判定
+    this.getNewFile();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-    this.setData(app.globalData.data)
+    this.setData(app.globalData.data);
   },
 
   /**
@@ -302,5 +319,35 @@ Page({
     wx.navigateTo({
       url: '../science/science?num='+e.currentTarget.dataset.num,
     })
-  }
+  },
+
+  // Edit by ASingleDog
+  // 判定是否获得新档案
+  getNewFile()
+  {
+    console.log({chapter:this.data.chapter, step:this.data.step})
+    let index = this.data.FileLoc.findIndex((element)=>element.chapter ==  this.data.chapter && element.step ==  this.data.step);
+    
+    if(index != -1)
+    {
+      let userData = this.data.userData;
+      if(userData.unlockFiles[index] != 1)
+      {
+        userData.unlockFiles[index] = 1;
+        this.setData({userData});
+        app.globalData.data=this.data;
+
+        const db = wx.cloud.database();
+        const userCl = db.collection('User');
+        userCl.where({openid:this.data.openId}).update({
+          data: {
+            unlockFiles:userData.unlockFiles
+          }
+        });
+        
+      }
+      
+    }
+  },
+
 })

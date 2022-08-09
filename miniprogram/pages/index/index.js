@@ -1,5 +1,5 @@
 const db = wx.cloud.database();
-const cl = db.collection('User');
+const userCl = db.collection('User');
 const sc = db.collection('Science');
 
 const app = getApp();
@@ -75,7 +75,7 @@ Page({
   {
     return new Promise(resolve => {
       let data;
-      cl.where({
+      userCl.where({
         openid: this.data.openId
       })
       .get() 
@@ -85,8 +85,9 @@ Page({
         {
           data = {
             openid: this.data.openId,
+            unlockFiles:[0, 0, 0, 0, 0, 0, 0]
           };
-          cl.add({
+          userCl.add({
             data
           });
         }
@@ -127,7 +128,7 @@ Page({
 
     if(this.checkAuthCode())
     {
-      cl.where({openid:this.data.openId}).update({
+      userCl.where({openid:this.data.openId}).update({
         data: {
           authCode: e.detail.value.input
         }

@@ -5,4 +5,75 @@
   <view>文件中心</view>
 </view>
 
+<!-- back icon -->
 <image src="https://pic.imgdb.cn/item/62d3ecc7f54cd3f937977c05.png" mode="widthFix" style="width: 100rpx;" id="back" bindtap="back"></image>
+
+<!-- content -->
+<view
+  style="position: absolute; right: 13%; top: 25%; Writing-mode:tb-rl; font-size: 60rpx; font-family: '华文行楷'; font-weight:900; z-index: 2;"
+  >
+  已收集到的档案
+</view>
+
+<view
+  style="position: absolute; right: 22%; top: 27%; Writing-mode:tb-rl; font-size: 50rpx; font-family: '华文行楷'; z-index: 3;"
+  bindtap="itemTapped"
+  data-id = '0'
+  wx:if="{{userData.unlockFiles[0]}}"
+  >
+  •电子会议记录和侦察小组合照
+</view>
+
+<view
+  style="position: absolute; right: 31%; top: 27%; Writing-mode:tb-rl; font-size: 50rpx; font-family: '华文行楷'; z-index: 3;"
+  bindtap="itemTapped"
+  data-id = '1'
+  wx:if="{{userData.unlockFiles[1]}}"
+  >
+  •戴笠的日记
+</view>
+
+<view
+  style="position: absolute; right: 40%; top: 27%; Writing-mode:tb-rl; font-size: 50rpx; font-family: '华文行楷'; z-index: 3;"
+  bindtap="itemTapped"
+  data-id = '2'
+  wx:if="{{userData.unlockFiles[2]}}"
+  >
+  •与会人员名单
+</view>
+
+<view
+  style="position: absolute; right: 49%; top: 27%; Writing-mode:tb-rl; font-size: 50rpx; font-family: '华文行楷'; z-index: 3;"
+  bindtap="itemTapped"
+  data-id = '3'
+  wx:if="{{userData.unlockFiles[3]}}"
+  >
+  •黄浚早稻田大学毕业证书
+</view>
+
+<view
+  style="position: absolute; right: 58%; top: 27%; Writing-mode:tb-rl; font-size: 50rpx; font-family: '华文行楷'; z-index: 3;"
+  bindtap="itemTapped"
+  data-id = '4'
+  wx:if="{{userData.unlockFiles[4]}}"
+  >
+  •黄浚与须磨的合照
+</view>
+
+<view
+  style="position: absolute; right: 67%; top: 27%; Writing-mode:tb-rl; font-size: 50rpx; font-family: '华文行楷'; z-index: 3;"
+  bindtap="itemTapped"
+  data-id = '5'
+  wx:if="{{userData.unlockFiles[5]}}"
+  >
+  •南京下关江防地图
+</view>
+
+<view
+  style="position: absolute; right: 76%; top: 27%; Writing-mode:tb-rl; font-size: 50rpx; font-family: '华文行楷'; z-index: 3;"
+  bindtap="itemTapped"
+  data-id = '6'
+  wx:if="{{userData.unlockFiles[6]}}"
+  >
+  •南京城市地图
+</view>

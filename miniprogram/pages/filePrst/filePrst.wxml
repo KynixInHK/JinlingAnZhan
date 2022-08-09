@@ -1,0 +1,35 @@
+<image id="background" src="https://pic.imgdb.cn/item/62d3e9c5f54cd3f93792d831.png" style="width: {{WindowWidth}}px; height: {{WindowHeight}}px;"></image>
+<image id="paper" src="https://s3.bmp.ovh/imgs/2022/08/09/55302a75fb601489.png" mode="widthFix"
+  style="width: {{WindowWidth}}px;"
+></image>
+<view class="box">
+  <image src="https://pic.imgdb.cn/item/62d3ea5cf54cd3f93793a31b.png" mode="widthFix" style="width: 500rpx;"></image>
+  <view>{{file[id].title}}</view>
+</view>
+<!-- back icon -->
+<image src="https://pic.imgdb.cn/item/62d3ecc7f54cd3f937977c05.png" mode="widthFix" style="width: 100rpx;" id="back" bindtap="back"></image>
+
+<!-- content -->
+<scroll-view
+  scroll-y
+  style="position: absolute; z-index: 3; top: 25%; left: {{WindowWidth*0.1}}px; height: {{WindowHeight * 0.43}}px; width: {{WindowWidth*0.85}}px;"
+  >
+
+  <image
+    mode="widthFix"
+    wx:for="{{file[id].img}}"
+    src = "{{item}}"
+    style="width:90%; border-style:solid; border-width:20rpx; border-image: url('https://s3.bmp.ovh/imgs/2022/08/09/7fda1d5f4cf5674c.png') 10 10 stretch;"
+    data-urls="{{file[id].img}}"
+    data-url ="{{item}}"
+    bindtap="openLargerImg"
+  >
+  </image>
+  <text
+    style="font-size:larger;"
+  >
+    {{file[id].text[0]}}
+  </text>
+  
+</scroll-view>
+

@@ -5,23 +5,23 @@
 
 #paper {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 660rpx;
+  left: 0;
+  right: 0;
+  margin: auto;
   top: 20%;
   z-index: -1;
 }
 
 .box {
   position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 50%; 
+  transform: translateX(-50%); 
   text-align: center;
   top: 120rpx;
   z-index: 0;
 }
 .box view {
-  font-size: 70rpx;
+  font-size: 55rpx;
   font-family: '方正舒体';
   position: absolute;
   left: 0;

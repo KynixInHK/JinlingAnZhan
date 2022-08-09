@@ -1,16 +1,15 @@
 {
   "pages": [
+    "pages/intro/intro",
+    "pages/files/files",
+    "pages/filePrst/filePrst",
     "pages/index/index",
     "pages/wordss/wordss",
     "pages/master/master",
-   
     "pages/science/science",
-    "pages/intro/intro",
     "pages/menu/menu",
-    
     "pages/thanks/thanks",
     "pages/main/main",
-    "pages/files/files",
     "pages/selchar/selchar",
     "pages/invitation/invitation",
     "pages/admin/admin"
@@ -21,7 +20,9 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "金陵暗战 小程序",
     "navigationBarTextStyle": "black",
-    "navigationStyle":"custom"
+    "navigationStyle":"custom",
+    "initialRenderingCache":"dynamic",
+    "handleWebviewPreload":"auto"
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"
