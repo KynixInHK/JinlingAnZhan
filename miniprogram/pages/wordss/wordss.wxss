@@ -90,3 +90,11 @@ input {
   left: 50%;
   transform: translateX(-63%);
 }
+#coverblurwokansheichong {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 0;
+  background-color: #fff;
+  opacity: 0.8;
+}

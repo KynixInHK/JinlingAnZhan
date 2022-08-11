@@ -1,5 +1,6 @@
 <image id="background" src="{{backUrl}}" style="width: {{WindowWidth}}px; height: {{WindowHeight}}px; z-index: -1; position: fixed;" bindtap="nextPage"></image>
 <image id="covercover" src="{{coverUrl}}" style="width: {{WindowWidth}}px; height: {{WindowHeight}}px; z-index: 0; position: fixed;" bindtap="nextPage" wx:if="{{isCover}}"></image>
+<view id="coverblurwokansheichong" wx:if="{{isWokansheichong}}" bindtap="nextPage"></view>
 <view class="box" bindtap="nextPage">
   <image src="https://s3.bmp.ovh/imgs/2022/07/17/80aead74f3456396.png" mode="widthFix" style="width: 450rpx;"></image>
   <view>{{title}}</view>

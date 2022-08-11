@@ -1,9 +1,4 @@
-const db = wx.cloud.database()
-const cl = db.collection('Story')
-const cl_qa = db.collection('QuestionsAndAnswers')
-const cl_bk = db.collection('Backgrounds')
 let app = getApp()
-const cl_invi = db.collection('Invitations')
 // pages/wordss/wordss.js
 Page({
 
@@ -36,6 +31,7 @@ Page({
     isCover: false,
     imageUrl: '',
     haveImage: false,
+    isWokansheichong: false,
 
     // Edit by ASingleDog
     // 档案解锁位置
@@ -64,12 +60,9 @@ Page({
     // })
     // 读取要跳转到Invitation页面的章节号
     let res = this.getInvi()
-    // cl_invi.get()
-    // .then((res) => {
       that.setData({
         toInvi: res.data
       })
-    // })
     // 设定跳转的章节和步骤
     this.setData({
       chapter: parseInt(options.chapter),
@@ -78,11 +71,6 @@ Page({
     // 设定缓存
     wx.setStorageSync('footstep', {chapter: this.data.chapter, step: this.data.step})
     res = this.getStory(this.data.chapter, this.data.step)
-    // cl.where({
-    //   chapter: this.data.chapter,
-    //   step: this.data.step
-    // }).get()
-    // .then((res) => {
       this.setData({
         content: res.data[0].content,
         type: res.data[0].type
@@ -100,19 +88,12 @@ Page({
         }) // 隐藏框框
       } else {
         let res = this.getQA(this.data.chapter, this.data.step)
-        // cl_qa.where({
-        //   chapter: this.data.chapter,
-        //   step: this.data.step
-        // }).get()
-        // .then((res)=> {
           this.setData({
             notHidden: true,
             placeholder: res.data[0].question,
             answer: res.data[0].answer
           })
-        // })
       }
-    // })
     // 设置标题
     const title = app.getChapterName(this.data.chapter)
     this.setData({
@@ -138,27 +119,29 @@ Page({
     // 读取所有的背景图片
     let res = this.getBack()
     console.log(res)
-    // cl_bk.get()
-    // .then((res) => {
     // 根据chapterID来设置背景照片
     if(this.data.chapter === 0 && this.data.step === 1) {
       this.setData({
         backUrl: res.data[1].url,
-        isCover: false
+        isCover: false,
+        isWokansheichong: true
       })
     }else if(this.data.chapter === 0 && this.data.ste!==1) {
       this.setData({
         backUrl: res.data[0].url,
-        isCover: true
+        isCover: true,
+        isWokansheichong: false
       })
     } else if(this.data.chapter === 4) {
       this.setData({
         backUrl: res.data[3].url,
-        isCover: true
+        isCover: true,
+        isWokansheichong: false
       })
     }else {
       this.setData({
-        backUrl: res.data[2].url
+        backUrl: res.data[2].url,
+        isWokansheichong: false
       })
     }
   },
@@ -237,11 +220,6 @@ Page({
       if(flag === false) {
         if((this.data.type === '3' && this.data.value === this.data.answer) || this.data.type !== '3') { // 如果输入了正确的答案
           let res = this.getStory(this.data.chapter, this.data.step + 1)
-          // cl.where({
-          //   chapter: this.data.chapter,
-          //   step: this.data.step + 1
-          // }).get()
-          // .then((res) => {
             if(res.data.length === 0) { // 如果到了本章的最后一节
               if(this.data.chapter !== 4) { // 如果不是最后一章
                 wx.redirectTo({
@@ -263,10 +241,6 @@ Page({
                 this.onLoad({chapter: this.data.chapter, step: this.data.step + 1})
               }
             }
-          // })
-          // .catch((err) => {
-          //   console.log(err)
-          // })
         }else {
           this.setData({
             inputUrl: 'https://pic.imgdb.cn/item/62d7c764f54cd3f937f1eed5.png'
