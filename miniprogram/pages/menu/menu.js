@@ -1,7 +1,5 @@
 // pages/menu/menu.js
 const app = getApp();
-const db = wx.cloud.database();
-const cl = db.collection('Story');
 Page({
 
   /**
@@ -126,11 +124,7 @@ Page({
   },
   
   getRedirectUrl(chapter, step) {
-    cl.where({
-      chapter: chapter,
-      step: step
-    }).get()
-    .then((res) => {
+    let res = this.getStory(chapter, step)
       if(res.data[0].type === '2') {
         wx.redirectTo({
           url: './../master/master?chapter=' + res.data[0].chapter + '&step=' + res.data[0].step + '&content=' + res.data[0].content,
@@ -140,7 +134,20 @@ Page({
           url: './../wordss/wordss?chapter=' + res.data[0].chapter + '&step=' + res.data[0].step,
         })
       }
-    })
-  }
+  },
+  getStory(chapter, step) {
+    let story = []
+    console.log(chapter)
+    console.log(typeof(chapter))
+    console.log(step)
+    console.log(typeof(step))
+    for(var i = 0;i < app.globalData.data.StoryData.length;i ++) {
+      if(app.globalData.data.StoryData[i].chapter === chapter && app.globalData.data.StoryData[i].step === step) {
+        story[0] = app.globalData.data.StoryData[i]
+        break
+      }
+    }
+    return {data: story}
+  },
   
 })

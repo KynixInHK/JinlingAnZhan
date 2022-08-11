@@ -1,5 +1,3 @@
-const db = wx.cloud.database()
-const cl = db.collection('Chapter')
 let app = getApp()
 // pages/main/main.js
 Page({
@@ -30,15 +28,11 @@ Page({
       id: parseInt(options.chapter)
     })
     console.log(this.data.id)
-    // 显示章节名称
-    cl.where({
-      id: that.data.id 
-    }).get()
-    .then((res) => {
-      that.setData({
-        chapterNum: res.data[0].chapterNum,
-        chapterName: res.data[0].chapterName
-      })
+    let res = this.getChapters(that.data.id)
+    console.log(res)
+    that.setData({
+      chapterNum: res.data[0].chapterNum,
+      chapterName: res.data[0].chapterName
     })
     
   },
@@ -104,5 +98,15 @@ Page({
     wx.redirectTo({
       url: './../wordss/wordss?chapter=' + this.data.id + '&step=1',
     })
+  },
+  getChapters(id) {
+    let chapter = []
+    for(var i = 0;i < app.globalData.data.ChapterData.length;i ++) {
+      if(app.globalData.data.ChapterData[i].id === id) {
+        chapter[0] = app.globalData.data.ChapterData[i]
+        break
+      }
+    }
+    return {data: chapter}
   }
 })

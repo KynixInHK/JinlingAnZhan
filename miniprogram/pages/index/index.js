@@ -1,6 +1,10 @@
 const db = wx.cloud.database();
 const userCl = db.collection('User');
 const sc = db.collection('Science');
+const backCl = db.collection('Backgrounds');
+const chapterCl = db.collection('Chapter');
+const inviCl = db.collection('Invitations');
+const qaCl = db.collection('QuestionsAndAnswers');
 
 const app = getApp();
 
@@ -15,6 +19,11 @@ Page({
     WindowHeight: 0,
     userData: {}, // 用户数据，字段详见云开发数据库
     ScienceData: [],
+    BackData: [],
+    ChapterData: [],
+    InviData: [],
+    QAData: [],
+    StoryData: []
   },
 
   async onLoad(options) {
@@ -26,6 +35,11 @@ Page({
     await this.getOpenId();
     await this.getUserData();
     await this.getScienceData();
+    await this.getStoryData();
+    await this.getBackData();
+    await this.getChapterData();
+    await this.getInviData();
+    await this.getQAData();
     console.log('该用户数据：');
     console.log(this.data.userData);
     app.globalData.data = this.data; // 利用globalData同步各页面数据
@@ -118,6 +132,75 @@ Page({
         console.log(e);
         resolve(1);
       });
+    })
+  },
+  getStoryData() {
+    wx.cloud.callFunction({
+      name: 'getChapters',
+      success: (res) => {
+        console.log('Story:')
+        console.log(res.result.data)
+        this.setData({
+          StoryData: res.result.data
+        })
+      },
+      fail: (err) => {
+      console.log('Error!')
+      console.log(err)
+      }
+    })
+  },
+
+  getBackData() {
+    backCl.get()
+    .then(res => {
+      console.log('Back:')
+      console.log(res.data)
+      this.setData({
+        BackData: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },
+  getChapterData() {
+    chapterCl.get()
+    .then(res => {
+      console.log('Chapter:')
+      console.log(res.data)
+      this.setData({
+        ChapterData : res.data
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },
+  getInviData() {
+    inviCl.get()
+    .then(res => {
+      console.log('Invi:')
+      console.log(res.data)
+      this.setData({
+        InviData: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },
+  getQAData() {
+    qaCl.get()
+    .then(res => {
+      console.log('QA:')
+      console.log(res.data)
+      this.setData({
+        QAData: res.data
+      })
+    })
+    .catch(err => {
+      console.log(err)
     })
   },
 

@@ -27,15 +27,7 @@ Page({
         notHidden: true
       })
     }
-    cl_invi.where({
-      chapter: parseInt(options.chapter),
-      step: parseInt(options.step)
-    }).get()
-    .then((res) => {
-      that.setData({
-        invi: res.data[0]
-      })
-    })
+    this.getInvi(parseInt(options.chapter), parseInt(options.step))
   },
 
   /**
@@ -89,6 +81,34 @@ Page({
   /**
    * 自定义方法
    */
+  getInvi (chapter, step) {
+    let that = this
+    console.log('this is the hello world test')
+    console.log(app.globalData.data.InviData)
+    for(var i = 0;i < app.globalData.data.InviData.length;i ++) {
+      if(app.globalData.data.InviData[i].chapter === chapter
+        && app.globalData.data.InviData[i].step === step) {
+          that.setData({
+            invi: app.globalData.data.InviData[i]
+          })
+          break
+        }
+    }
+  },
+  getStory(chapter, step) {
+    let story = []
+    console.log(chapter)
+    console.log(typeof(chapter))
+    console.log(step)
+    console.log(typeof(step))
+    for(var i = 0;i < app.globalData.data.StoryData.length;i ++) {
+      if(app.globalData.data.StoryData[i].chapter === chapter && app.globalData.data.StoryData[i].step === step) {
+        story[0] = app.globalData.data.StoryData[i]
+        break
+      }
+    }
+    return {data: story}
+  },
   nextPage() {
     console.log(this.data.invi.step + 1)
     const that = this
@@ -96,11 +116,8 @@ Page({
       this.setData({
         zhongchou: false
       })
-      cl.where({
-        chapter: that.data.invi.chapter,
-        step: that.data.invi.step + 1
-      }).get()
-      .then((res) => {
+        let res = this.getStory(that.data.invi.chapter, that.data.invi.step + 1)
+        console.log(res)
         if(res.data.length === 0) { // 到了本章的最后一节
           if(that.data.invi.chapter !== 4) { // 如果不是最后一章
             wx.redirectTo({
@@ -122,10 +139,6 @@ Page({
             })
           }
         }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
     }else { // 解锁二十万众筹福利
       this.setData({
         zhongchou: true

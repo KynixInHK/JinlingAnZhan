@@ -1,8 +1,5 @@
 // pages/master/master.js
 let app = getApp()
-const db = wx.cloud.database()
-const cl = db.collection('Story')
-const cl_bk = db.collection('Backgrounds')
 Page({
 
   /**
@@ -57,8 +54,7 @@ Page({
     // 设定缓存
     wx.setStorageSync('footstep', {chapter: this.data.chapter, step: this.data.step})
     // 获取背景照片
-    cl_bk.get()
-    .then((res) => {
+    let res = this.getBack()
       if(this.data.chapter === 0 && this.data.step === 2) {
         this.setData({
           backUrl: res.data[1].url
@@ -72,7 +68,6 @@ Page({
           backUrl: res.data[0].url
         })
       }
-    })
 
     // Edit by ASingleDog
     // 获取档案判定
@@ -137,11 +132,7 @@ Page({
    */
   nextPage() {
     // 获取下一页的内容
-    cl.where({
-      chapter: this.data.chapter,
-      step: this.data.step + 1
-    }).get()
-    .then((res) => {
+    let res = this.getStory(this.data.chapter, this.data.step + 1)
       if(res.data.length === 0) { // 如果到了本章的最后一节
         if(this.data.chapter !== 4) { // 如果不是最后一章
           wx.redirectTo({
@@ -163,7 +154,20 @@ Page({
           })
         }
       }
-    })
+  },
+  getStory(chapter, step) {
+    let story = []
+    console.log(chapter)
+    console.log(typeof(chapter))
+    console.log(step)
+    console.log(typeof(step))
+    for(var i = 0;i < app.globalData.data.StoryData.length;i ++) {
+      if(app.globalData.data.StoryData[i].chapter === chapter && app.globalData.data.StoryData[i].step === step) {
+        story[0] = app.globalData.data.StoryData[i]
+        break
+      }
+    }
+    return {data: story}
   },
   toFiles() {
     wx.navigateTo({
@@ -204,5 +208,11 @@ Page({
       
     }
   },
-
+  getBack() {
+    let backs = []
+    for(var i = 0;i < app.globalData.data.BackData.length;i ++) {
+      backs[i] = app.globalData.data.BackData[i]
+    }
+    return {data: backs}
+  }
 })
