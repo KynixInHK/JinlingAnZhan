@@ -32,16 +32,32 @@ Page({
       mask: true
     });
     this.setData({WindowWidth: wx.getWindowInfo().screenWidth, WindowHeight: wx.getWindowInfo().screenHeight});
+
     await this.getOpenId();
-    await this.getUserData();
-    await this.getScienceData();
-    await this.getStoryData();
-    await this.getBackData();
-    await this.getChapterData();
-    await this.getInviData();
-    await this.getQAData();
+    
+    await Promise.all([
+      this.getUserData(),
+      this.getScienceData(),
+      this.getStoryData(),
+      this.getBackData(),
+      this.getChapterData(),
+      this.getInviData(),
+      this.getQAData()
+    ]);
+
+    // await this.getOpenId();
+    // await this.getUserData();
+    // await this.getScienceData();
+    // await this.getStoryData();
+    // await this.getBackData();
+    // await this.getChapterData();
+    // await this.getInviData();
+    // await this.getQAData();
+
     console.log('该用户数据：');
     console.log(this.data.userData);
+
+
     app.globalData.data = this.data; // 利用globalData同步各页面数据
     wx.hideLoading();
     
@@ -134,75 +150,102 @@ Page({
       });
     })
   },
+
+
   getStoryData() {
-    wx.cloud.callFunction({
-      name: 'getChapters',
-      success: (res) => {
-        console.log('Story:')
-        console.log(res.result.data)
-        this.setData({
-          StoryData: res.result.data
-        })
-      },
-      fail: (err) => {
-      console.log('Error!')
-      console.log(err)
-      }
+    return new Promise(resolve=>{
+      wx.cloud.callFunction({
+        name: 'getChapters',
+        success: (res) => {
+          console.log('Story:')
+          console.log(res.result.data)
+          this.setData({
+            StoryData: res.result.data
+          })
+          resolve(0);
+        },
+        fail: (err) => {
+        console.log('Error!');
+        console.log(err);
+        resolve(1);
+        }
+      })
     })
   },
 
   getBackData() {
-    backCl.get()
-    .then(res => {
-      console.log('Back:')
-      console.log(res.data)
-      this.setData({
-        BackData: res.data
+    return new Promise(resolve=>{
+      backCl.get()
+      .then(res => {
+        console.log('Back:')
+        console.log(res.data)
+        this.setData({
+          BackData: res.data
+        })
+        resolve(0);
+      })
+      .catch(err => {
+        console.log(err)
+        resolve(1);
       })
     })
-    .catch(err => {
-      console.log(err)
-    })
+    
   },
   getChapterData() {
-    chapterCl.get()
-    .then(res => {
-      console.log('Chapter:')
-      console.log(res.data)
-      this.setData({
-        ChapterData : res.data
+    return new Promise(resolve=>{
+      chapterCl.get()
+      .then(res => {
+        console.log('Chapter:')
+        console.log(res.data)
+        this.setData({
+          ChapterData : res.data
+        })
+        resolve(0);
+      })
+      .catch(err => {
+        console.log(err)
+        resolve(1);
       })
     })
-    .catch(err => {
-      console.log(err)
-    })
+    
   },
   getInviData() {
-    inviCl.get()
-    .then(res => {
-      console.log('Invi:')
-      console.log(res.data)
-      this.setData({
-        InviData: res.data
+    return new Promise(resolve=>{
+      inviCl.get()
+      .then(res => {
+        console.log('Invi:')
+        console.log(res.data)
+        this.setData({
+          InviData: res.data
+        })
+        resolve(0);
+      })
+      .catch(err => {
+        console.log(err)
+        resolve(1);
       })
     })
-    .catch(err => {
-      console.log(err)
-    })
+    
   },
   getQAData() {
-    qaCl.get()
-    .then(res => {
-      console.log('QA:')
-      console.log(res.data)
-      this.setData({
-        QAData: res.data
+    return new Promise(resolve=>{
+      qaCl.get()
+      .then(res => {
+        console.log('QA:')
+        console.log(res.data)
+        this.setData({
+          QAData: res.data
+        })
+        resolve(0);
+      })
+      .catch(err => {
+        console.log(err)
+        resolve(1);
       })
     })
-    .catch(err => {
-      console.log(err)
-    })
   },
+
+
 
   async formSubmit(e)
   {
