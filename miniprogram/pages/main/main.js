@@ -34,7 +34,12 @@ Page({
       chapterNum: res.data[0].chapterNum,
       chapterName: res.data[0].chapterName
     })
-    
+    // 加载字体
+    wx.loadFontFace({
+      family: '方正舒体',
+      source: 'url("http://124.71.184.29:8080/fileManager-1.0-SNAPSHOT/fzstjw.ttf")',
+      success: console.log
+    })
   },
 
   /**
