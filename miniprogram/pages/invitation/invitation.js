@@ -22,7 +22,7 @@ Page({
   onLoad(options) {
     let that = this
     this.setData({WindowWidth: wx.getWindowInfo().screenWidth, WindowHeight: wx.getWindowInfo().screenHeight});
-    if(options.chapter === '0' && options.step === '7') {
+    if(options.chapter === '0' && options.step === '8') {
       this.setData({
         notHidden: true
       })
@@ -97,10 +97,6 @@ Page({
   },
   getStory(chapter, step) {
     let story = []
-    console.log(chapter)
-    console.log(typeof(chapter))
-    console.log(step)
-    console.log(typeof(step))
     for(var i = 0;i < app.globalData.data.StoryData.length;i ++) {
       if(app.globalData.data.StoryData[i].chapter === chapter && app.globalData.data.StoryData[i].step === step) {
         story[0] = app.globalData.data.StoryData[i]

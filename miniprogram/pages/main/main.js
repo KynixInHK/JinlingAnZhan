@@ -19,7 +19,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.setData(app.globalData.data)
     let that = this
     this.setData({WindowWidth: wx.getWindowInfo().screenWidth, WindowHeight: wx.getWindowInfo().screenHeight});
     // 获取章节ID
@@ -46,7 +45,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-    
+    this.setData(app.globalData.data)
     // 开始计时
     let set = setTimeout(() => {
       wx.redirectTo({

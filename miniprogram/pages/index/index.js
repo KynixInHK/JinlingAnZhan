@@ -1,10 +1,10 @@
 const db = wx.cloud.database();
-const userCl = db.collection('User');
+const userCl = db.collection('User'); // ok
 const sc = db.collection('Science');
-const backCl = db.collection('Backgrounds');
-const chapterCl = db.collection('Chapter');
-const inviCl = db.collection('Invitations');
-const qaCl = db.collection('QuestionsAndAnswers');
+const backCl = db.collection('Backgrounds'); // ok
+const chapterCl = db.collection('Chapter'); // ok
+const inviCl = db.collection('Invitations'); 
+const qaCl = db.collection('QuestionsAndAnswers'); // ok
 
 const app = getApp();
 

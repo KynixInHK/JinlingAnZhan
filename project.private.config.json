@@ -122,6 +122,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "intro",
+          "pathName": "pages/intro/intro",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

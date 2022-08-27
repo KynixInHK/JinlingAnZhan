@@ -102,7 +102,7 @@ Page({
 
     // Edit by ASingleDog
     // 获取档案判定
-    this.getNewFile();
+    // this.getNewFile();
   },
 
   /**
@@ -126,7 +126,7 @@ Page({
         isCover: false,
         isWokansheichong: true
       })
-    }else if(this.data.chapter === 0 && this.data.ste!==1) {
+    }else if(this.data.chapter === 0 && this.data.step!==1) {
       this.setData({
         backUrl: res.data[0].url,
         isCover: true,
@@ -196,22 +196,22 @@ Page({
         break
       }
     }
-    if((this.data.chapter === 3 && this.data.step === 37 && this.data.value === this.data.answer)) {
+    if((this.data.chapter === 3 && this.data.step === 13 && this.data.value === this.data.answer)) {
       this.setData({
         zhongchou2: true
       })
     }
-    if((this.data.chapter === 3 && this.data.step === 9 && this.data.value === this.data.answer)) {
+    if((this.data.chapter === 3 && this.data.step === 2)) {
       this.setData({
         zhongchou1: true
       })
     }
-    if((this.data.chapter === 3 && this.data.step === 9 && this.data.value !== this.data.answer) || (this.data.chapter === 3 && this.data.step === 37 && this.data.value !== this.data.answer)) {
+    if((this.data.chapter === 3 && this.data.step === 13 && this.data.value !== this.data.answer)) {
       this.setData({
         inputUrl: 'https://pic.imgdb.cn/item/62d7c764f54cd3f937f1eed5.png'
       })
     }
-    if((this.data.chapter === 3 && this.data.step !== 9 && this.data.step !== 37) || (this.data.zhongchou1 === true  && this.data.times === 1) || (this.data.zhongchou2 === true && this.data.times === 1) || this.data.chapter !== 3) {
+    if((this.data.chapter === 3 && this.data.step !== 2 && this.data.step !== 13) || (this.data.zhongchou1 === true  && this.data.times === 1) || (this.data.zhongchou2 === true && this.data.times === 1) || this.data.chapter !== 3) {
       that.setData({
         zhongchou1: false,
         zhongchou2: false,
@@ -232,6 +232,7 @@ Page({
               }
             }else { // 如果不是本章的最后一节
               if(res.data[0].type === '2') {
+                // console.log(res.data[0])
                 wx.redirectTo({ // 跳转到主剧情页面
                   url: './../master/master?chapter=' + this.data.chapter + '&step=' + res.data[0].step + '&content=' + res.data[0].content,
                 })
@@ -323,31 +324,31 @@ Page({
 
   // Edit by ASingleDog
   // 判定是否获得新档案
-  getNewFile()
-  {
-    console.log({chapter:this.data.chapter, step:this.data.step})
-    let index = this.data.FileLoc.findIndex((element)=>element.chapter ==  this.data.chapter && element.step ==  this.data.step);
+  // getNewFile()
+  // {
+  //   // console.log({chapter:this.data.chapter, step:this.data.step})
+  //   let index = this.data.FileLoc.findIndex((element)=>element.chapter ==  this.data.chapter && element.step ==  this.data.step);
     
-    if(index != -1)
-    {
-      let userData = this.data.userData;
-      if(userData.unlockFiles[index] != 1)
-      {
-        userData.unlockFiles[index] = 1;
-        this.setData({userData});
-        app.globalData.data=this.data;
+  //   if(index != -1)
+  //   {
+  //     let userData = this.data.userData;
+  //     if(userData.unlockFiles[index] != 1)
+  //     {
+  //       userData.unlockFiles[index] = 1;
+  //       this.setData({userData});
+  //       app.globalData.data=this.data;
 
-        const db = wx.cloud.database();
-        const userCl = db.collection('User');
-        userCl.where({openid:this.data.openId}).update({
-          data: {
-            unlockFiles:userData.unlockFiles
-          }
-        });
+  //       const db = wx.cloud.database();
+  //       const userCl = db.collection('User');
+  //       userCl.where({openid:this.data.openId}).update({
+  //         data: {
+  //           unlockFiles:userData.unlockFiles
+  //         }
+  //       });
         
-      }
+  //     }
       
-    }
-  },
+  //   }
+  // },
 
 })

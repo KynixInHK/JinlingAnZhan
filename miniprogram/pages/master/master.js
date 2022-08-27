@@ -36,9 +36,8 @@ Page({
   onLoad(options) {
     let that = this
     let option = options
-    this.setData(app.globalData.data)
     this.setData({WindowWidth: wx.getWindowInfo().screenWidth, WindowHeight: wx.getWindowInfo().screenHeight});
-    if(this.data.userData.selChar === 1) {
+    if(app.globalData.data.userData.selChar === 1) {
       this.setData({
         HumanURL: 'https://pic.imgdb.cn/item/62d756f4f54cd3f937da8f24.png'
       })
@@ -71,7 +70,7 @@ Page({
 
     // Edit by ASingleDog
     // 获取档案判定
-    this.getNewFile();
+    // this.getNewFile();this.setData(app.globalData.data)
   },
 
   /**
@@ -85,12 +84,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    // let set = setTimeout(()=> {
-    //   this.nextPage()
-    // }, 30000)
-    // this.setData({
-    //   set: set
-    // })
+    console.log()
   },
 
   /**
@@ -133,6 +127,7 @@ Page({
   nextPage() {
     // 获取下一页的内容
     let res = this.getStory(this.data.chapter, this.data.step + 1)
+    console.log(res)
       if(res.data.length === 0) { // 如果到了本章的最后一节
         if(this.data.chapter !== 4) { // 如果不是最后一章
           wx.redirectTo({
@@ -146,7 +141,8 @@ Page({
       }else { // 如果不是本章的最后一节
         if(res.data[0].type === '2') {
           this.setData({
-            content: res.data[0].content
+            content: res.data[0].content,
+            step: this.data.step + 1
           })          
         }else {
           wx.redirectTo({
@@ -182,32 +178,32 @@ Page({
 
   // Edit by ASingleDog
   // 判定是否获得新档案
-  getNewFile()
-  {
-    console.log({chapter:this.data.chapter, step:this.data.step})
-    let index = this.data.FileLoc.findIndex((element)=>element.chapter ==  this.data.chapter && element.step ==  this.data.step);
+  // getNewFile()
+  // {
+  //   console.log({chapter:this.data.chapter, step:this.data.step})
+  //   let index = this.data.FileLoc.findIndex((element)=>element.chapter ==  this.data.chapter && element.step ==  this.data.step);
     
-    if(index != -1)
-    {
-      let userData = this.data.userData;
-      if(userData.unlockFiles[index] != 1)
-      {
-        userData.unlockFiles[index] = 1;
-        this.setData({userData});
-        app.globalData.data=this.data;
+  //   if(index != -1)
+  //   {
+  //     let userData = this.data.userData;
+  //     if(userData.unlockFiles[index] != 1)
+  //     {
+  //       userData.unlockFiles[index] = 1;
+  //       this.setData({userData});
+  //       app.globalData.data=this.data;
 
-        const db = wx.cloud.database();
-        const userCl = db.collection('User');
-        userCl.where({openid:this.data.openId}).update({
-          data: {
-            unlockFiles:userData.unlockFiles
-          }
-        });
+  //       const db = wx.cloud.database();
+  //       const userCl = db.collection('User');
+  //       userCl.where({openid:this.data.openId}).update({
+  //         data: {
+  //           unlockFiles:userData.unlockFiles
+  //         }
+  //       });
         
-      }
+  //     }
       
-    }
-  },
+  //   }
+  // },
   getBack() {
     let backs = []
     for(var i = 0;i < app.globalData.data.BackData.length;i ++) {
